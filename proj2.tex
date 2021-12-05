@@ -1,0 +1,85 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{hyperref}
+
+% Header and footer.
+\pagestyle{headandfoot}
+\runningheadrule
+\runningfootrule
+\runningheader{CS 440}{Project 2}{Fall 2021}
+\runningfooter{}{Page \thepage\ of \numpages}{}
+\firstpageheader{}{}{}
+
+\qformat{{\large\bf \thequestion. \thequestiontitle}\hfill}
+\boxedpoints
+% \printanswers
+
+\title{Project 2}
+\author{CS 440 Computer Graphics\\Habib University\\Fall 2021}
+\date{Due: to be shared}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+In this project you will extend your ray tracing engine from Homework 3.
+
+You may enhance object appearance by implementing new \emph{materials}. You may implement anti-aliasing by adding new \textit{samplers}. The scene will be lit by one or more \emph{light sources}. Ray-tracing is accelerated through \textit{acceleration structures}. Secondary and shadow rays are traced through various \textit{tracers}.
+
+You will correspondingly derive new classes from \texttt{Material} and \texttt{Sampler}, and construct new hierarchies for \texttt{Light}, \texttt{Acceleration}, and \texttt{Tracer}.
+
+\begin{questions}
+  
+  \titledquestion{Appearance and Lighting}
+  The light source in Homework 3 was at the camera. Implement other light sources, e.g. point, spotlight, and directional by adding a new folder called \texttt{lights} and populating it with a hierarchy of \texttt{Light} subclasses. Add a \texttt{std::vector<Light*>} member to \texttt{World} and use it to light the scene.
+
+  Implement new \texttt{Material} subclasses that apply more detailed shading that the Cosine shader.
+
+  \titledquestion{Acceleration}
+  Add a new folder called \texttt{acceleration} and populate it with a hierarchy of acceleration structures. Add an \texttt{Acceleration*} member to \texttt{World} and use it to compute ray intersections.
+
+  \titledquestion{Ray Casting}
+  The ray tracer in \texttt{raytracer.cpp} is very basic--it shades based on primary rays only. Add a new folder called \texttt{tracers} and populate it with a hierarchy of \texttt{Tracer} classes. You can start the hierarchy by moving the ray tracer in \texttt{raytracer.cpp} to a \texttt{Basic} class derived from \texttt{Tracer}. Add other ray tracers that implement other ray tracing features like shadows, recursive levels of reflection, and transparency. Add a \texttt{Tracer*} member to \texttt{World} and use it for ray tracing.
+
+  \newpage
+  \titledquestion{Showcase}
+  We now want to showcase your ray tracing engine--how good it is and how it can be used to create stunning images. Your task is to:
+  \begin{itemize}
+  \item \textbf{Create an original scene}. The scene should be \emph{original}. You may derive inspiration from past rendering competitions such as those listed on the LMS page containing \href{https://hulms.instructure.com/courses/1622/pages/project-2-resources?module_item_id=55192}{Project 2 Resources}, but the final scene should be the product of your own imagination.
+    
+    You may use third-party assets. The used assets must be publicly available for free. You can use them to build your original scene but it is not allowed for the whole, or major part, of the scene to be reused from somewhere. Alternatively, you can model everything yourself. You may find helpful links on the LMS page on  \href{https://hulms.instructure.com/courses/1622/pages/project-2-resources?module_item_id=55192}{Project 2 Resources}.
+
+  \item \textbf{Use your engine to render the scene}. You must create two renders of your scene: a low quality render at a resolution of 480x360 and a high quality render with resolution 1920x1080 or higher. You may use different aspect ratios if they better fit your scene.
+    
+    The images must be rendered by your engine. Any post-processing must be implemented within your framework. The images need not be realistic. You can use features that do not follow real world physics if it better suits your artistic concept.
+    
+    The high quality image must render in less than 6 hours on a modern computer.
+
+  \item \textbf{Create a web page to showcase your work}. The website should feature your render and its title. It should include the following.
+    \begin{description}
+    \item[Concept] description of your concept and how you arrived at it.
+    \item[Scene] describe how you built your scene.
+    \item[Image Features] highlight interesting parts or features of your render. Additional images may be included for this purpose.
+    \item[Code Features] list all the features that you have implemented in your ray tracer.
+    \item[Acceleration] include a table comparing rendering times of your ray tracer with and without an acceleration structure. Supporting renderings must be included.
+    \item[Build] for every image included on the page, a link to the corresponding implementation of {\tt World::build},
+    \item[Acknowledgment] acknowledge all third party sources of used assets or resources, once where they are used, e.g. in the caption of a rendered image, and again in an \textbf{Acknowledgment} section toward the bottom of the page.
+    \item[Team] include the names of all team members and a photograph of your team.
+    \item[Comments] include any other comments desired by the team.
+    \end{description}
+  \end{itemize}
+
+  Some sample webpages are provided on LMS under \href{https://hulms.instructure.com/courses/1622/pages/project-2-resources?module_item_id=55192}{Project 2 Resources}. Any accompanying build or code files have been removed from the samples. As your submission may also be shared in the future as a sample, take care to only include images which you are comfortable sharing publicly.
+  
+\end{questions}
+
+\section*{Credits}
+
+This project is adapted from the rendering competition run by \href{https://graphics.cg.uni-saarland.de/people/slusallek.html}{Philipp Slusallek} in his \href{https://graphics.cg.uni-saarland.de/courses/cg1-2020/}{Computer Graphics 1 course}. The code is adapted from that provided by \href{http://www.raytracegroundup.com/}{Kevin Suffern}.
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

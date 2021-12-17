@@ -81,6 +81,13 @@ bool Triangle::hit(const Ray &ray, float &t, ShadeInfo &s_) const {
     
 }
 
-BBox Triangle::getBBox() const {
-    
-};
+// Get bounding box.
+BBox Triangle::getBBox() const
+{
+	Point3D tempMin = min(v0, v1);
+    Point3D PMIN = min(tempMin, v2);
+    Point3D tempMax = max(v0, v1);
+    Point3D PMAX = max(tempMax, v2);
+
+	return BBox(PMIN, PMAX);
+}

@@ -15,7 +15,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../geometry/Geometry.hpp"
-
+#include "../acceleration/Grid.hpp"
 #include "ViewPlane.hpp"
 
 class Camera;
@@ -33,6 +33,7 @@ public:
   Camera *camera_ptr;
   Sampler *sampler_ptr;
   Tracer *tracer_ptr;
+  Acceleration* accel;
 
 public:
   // Constructors.

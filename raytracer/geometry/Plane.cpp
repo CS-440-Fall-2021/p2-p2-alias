@@ -55,5 +55,29 @@ bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const{
 }
 
 BBox Plane::getBBox() const{
-    // TODO: getBBox for Plane
+
+    Point3D PMIN;
+    Point3D PMAX;
+    // Check if normal is parallel to x-axis
+    if (n.x != 0 && n.y == 0 && n.z == 0){
+        PMIN = Point3D(a.x, -inf, -inf);
+	    PMAX = Point3D(a.x, inf, inf);
+    }
+    // Check if normal is parallel to y-axis
+    else if (n.x == 0 && n.y != 0 && n.z == 0){
+        PMIN = Point3D(-inf, a.y, -inf);
+	    PMAX = Point3D(inf, a.y, inf);
+    }
+    // Check if normal is parallel to z-axis
+    else if (n.x == 0 && n.y != 0 && n.z == 0){
+        PMIN = Point3D(-inf, -inf, a.z);
+	    PMAX = Point3D(inf, inf, a.z);
+    }
+    else{
+        PMIN = Point3D(-inf, -inf, -inf);
+	    PMAX = Point3D(inf, inf, inf);
+    }
+
+    return BBox(PMIN, PMAX);
+    
 }

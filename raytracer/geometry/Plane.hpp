@@ -15,6 +15,9 @@
 #include "../utilities/Ray.hpp"
 #include "../utilities/Constants.hpp"
 
+#include <limits>
+#define inf std::numeric_limits<float>::infinity()
+
 class Plane : public Geometry {
 protected:
   Point3D a;  // point on the plane.

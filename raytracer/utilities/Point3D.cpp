@@ -66,12 +66,67 @@ Point3D operator*(const float a, const Point3D &pt){
     return pt * a;
 }
 
+// Point3D min(const Point3D& a, const Point3D& b){
+//     // comparing on the basis of distance from origin
+//     return a.distance(Point3D()) < b.distance(Point3D()) ? a : b;
+// }
+
+// Point3D max(const Point3D& a, const Point3D& b){
+//     // comparing on the basis of distance from origin
+//     return a.distance(Point3D()) > b.distance(Point3D()) ? a : b;
+// }
+
+// Compare points.
 Point3D min(const Point3D& a, const Point3D& b){
-    // comparing on the basis of distance from origin
-    return a.distance(Point3D()) < b.distance(Point3D()) ? a : b;
+    float minX;
+    float minY;
+    float minZ;
+
+    if (a.x <= b.x){
+        minX = a.x;
+    }
+    else{
+        minX = b.x;
+    }
+    if (a.y <= b.y){
+        minY = a.y;
+    }
+    else{
+        minY = b.y;
+    }
+    if (a.z <= b.z){
+        minZ = a.z;
+    }
+    else{
+        minZ = b.z;
+    }
+
+    return Point3D(minX, minY, minZ);
 }
 
 Point3D max(const Point3D& a, const Point3D& b){
-    // comparing on the basis of distance from origin
-    return a.distance(Point3D()) > b.distance(Point3D()) ? a : b;
+    float maxX;
+    float maxY;
+    float maxZ;
+
+    if (a.x >= b.x){
+        maxX = a.x;
+    }
+    else{
+        maxX = b.x;
+    }
+    if (a.y >= b.y){
+        maxY = a.y;
+    }
+    else{
+        maxY = b.y;
+    }
+    if (a.z >= b.z){
+        maxZ = a.z;
+    }
+    else{
+        maxZ = b.z;
+    }
+
+    return Point3D(maxX, maxY, maxZ);
 }

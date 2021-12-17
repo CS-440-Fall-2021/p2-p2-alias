@@ -99,3 +99,23 @@ There is a lot to handle and there are bound to be confusions and queries. Pleas
 - Only include images which you are comfortable sharing publicly.
 - There is no late submission. Submit whatever you have by the deadline.
 - viel Spaß!
+
+# Compilation Instruction (for self-reference)
+
+1. Goto ray tracer directory from root with : 
+    cd raytracer
+2. Compile with:
+    g++ -o test.exe -I ./utilities/*.cpp test.cpp
+3. Run with:
+    .\test.exe
+
+
+1. Goto ray tracer directory from root with : 
+    cd raytracer
+2. Compile with:
+    g++ -o raytracer.exe raytracer.cpp ./utilities/*.cpp ./world/*.cpp ./cameras/*.cpp ./geometry/*.cpp ./materials/*.cpp ./samplers/*.cpp ./build/buildChapter14.cpp
+
+    g++ -o raytracer.exe raytracer.cpp ./utilities/*.cpp ./world/*.cpp ./cameras/*.cpp ./geometry/*.cpp ./materials/*.cpp ./samplers/*.cpp ./build/buildHelloWorld.cpp
+    
+3. Run with:
+    .\raytracer.exe

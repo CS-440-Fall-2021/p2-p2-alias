@@ -81,7 +81,9 @@ bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const
 }
 
 // Get bounding box.
-BBox Sphere::getBBox() const
-{
-    // TODO: getBBox for Sphere
+BBox Sphere::getBBox() const{
+	Point3D PMIN = Point3D(c.x - r, c.y - r, c.z - r);
+	Point3D PMAX = Point3D(c.x + r, c.y + r, c.z + r);
+
+	return BBox(PMIN, PMAX);
 }

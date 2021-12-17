@@ -26,7 +26,7 @@ std::vector<Ray> Simple::get_rays(int px, int py) const{
     float ypos = viewplane_ptr->top_left.y - v * (py + 0.5);
     
     Point3D point = Point3D(xpos, ypos, viewplane_ptr->bottom_right.z);
-    Vector3D dir = camera_ptr->get_direction(point);
+    Vector3D dir = camera_ptr->ray_direction(point);
     
     dir.normalize();
     std::vector<Ray> rays {Ray(point, dir)};

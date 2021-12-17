@@ -71,6 +71,12 @@ void Vector3D::normalize(){
         *this = *this/length();
 } 
 
+Vector3D Vector3D::hat() const{
+    Vector3D n(*this);
+    n.normalize();
+    return n;
+}
+
 
 double Vector3D::length() const{
     return sqrt(x*x + y*y + z*z);

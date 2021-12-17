@@ -8,11 +8,14 @@
 */
 
 #include "../cameras/Parallel.hpp"
+#include "../cameras/Pinhole.hpp"
 
 #include "../geometry/Plane.hpp"
 #include "../geometry/Sphere.hpp"
 
 #include "../materials/Cosine.hpp"
+
+#include "../tracers/Basic.hpp"
 
 #include "../samplers/Simple.hpp"
 
@@ -32,11 +35,15 @@ World::build(void) {
   vplane.bottom_right.z = 100;
   vplane.hres = 400;
   vplane.vres = 400;
+
+  tracer_ptr = new Basic(this);
   
   bg_color = black;  // background color.
   
   // camera and sampler.
-  set_camera(new Parallel(0, 0, -1));
+  Camera *cam = new Pinhole(Point3D(-320, 240, -30), Point3D(-320, 240, 0), 30);
+  cam->compute_uvw();
+  set_camera(cam);
   sampler_ptr = new Simple(camera_ptr, &vplane);
 	
   // colors

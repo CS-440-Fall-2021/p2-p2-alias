@@ -36,3 +36,7 @@ ShadeInfo World::hit_objects(const Ray &ray){
     sf.ray.d.normalize();
     return sf;
 }
+
+void World::set_tracer(Tracer *t_ptr){
+    tracer_ptr = t_ptr;
+}

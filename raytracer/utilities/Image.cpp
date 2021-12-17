@@ -56,7 +56,8 @@ void Image::write_ppm(std::string path) const
         {
             for (int j=0; j<vres;j++)
             {
-               fputs(colors[i][j].to_string().c_str(), pFile);
+                RGBColor c = colors[i][j];
+               fputs(c.to_string().c_str(), pFile);
             }
         }
         fclose(pFile);

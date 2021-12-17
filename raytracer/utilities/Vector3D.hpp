@@ -45,6 +45,7 @@ public:
   Vector3D operator*(const double a) const;
   Vector3D operator/(const double a) const;
   void normalize(); // nomalize - convert to a unit vector.
+  Vector3D hat() const; // return a normalized vector of this vector.
 
   // Length.
   double length() const;      // length.

@@ -1,11 +1,15 @@
 **/*~
 auto/
 
+.vscode/*
+
 *.aux
 *.log
 *.out
 *.pdf
 *.synctex.gz
+*.fdb_latexmk
+*.fls
 
 
 *.DS_Store
@@ -13,5 +17,6 @@ auto/
 raytracer/obj
 
 raytracer/raytracer
+**/*.exe
 **/*.png
 **/*.ppm

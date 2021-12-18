@@ -7,7 +7,6 @@
 #include "../utilities/Constants.hpp"
 #include <vector> 
 #include "../geometry/Compound.hpp"
-using namespace std;
 
 class Acceleration : public Compound
 {

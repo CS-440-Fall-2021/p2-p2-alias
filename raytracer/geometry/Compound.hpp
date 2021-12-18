@@ -42,7 +42,7 @@ class Compound: public Geometry {
 		int
 		get_num_objects(void);						
 
-		virtual bool hit(const Ray& ray, float& tmin, ShadeInfo& s) const;
+		virtual bool hit(const Ray& ray, float& tmin, ShadeInfo& s);
  
 		virtual BBox getBBox() const override;
 	protected:		

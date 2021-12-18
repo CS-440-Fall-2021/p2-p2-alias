@@ -36,5 +36,5 @@ public:
      \theta is the angle between the normal at the hit pont and the ray.
      Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
   */
-  virtual RGBColor shade(const ShadeInfo &sinfo) const override;
+  virtual RGBColor shade(ShadeInfo &sinfo) override;
 };

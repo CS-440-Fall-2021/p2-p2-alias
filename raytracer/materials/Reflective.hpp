@@ -15,5 +15,5 @@ class Reflective: public Phong {
 
     ~Reflective() = default;
 
-    virtual RGBColor shade(ShadeInfo& sr);    
+    virtual RGBColor shade(ShadeInfo& sr) override;    
 };

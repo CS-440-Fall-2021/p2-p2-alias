@@ -1,6 +1,6 @@
 #include "Matte.hpp"
 
-RGBColor Matte::shade(const ShadeInfo& sinfo) const{
+RGBColor Matte::shade(ShadeInfo& sinfo){
     Vector3D wo = -sinfo.ray.d;
     RGBColor L = ambient_brdf->rho(sinfo, wo) * sinfo.w->ambient_ptr->L(sinfo);
     int numLights = sinfo.w->lights.size();

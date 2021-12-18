@@ -19,7 +19,7 @@ public:
     // Destructor.
     virtual ~Matte() = default;
 
-    virtual RGBColor shade(const ShadeInfo &sinfo) const override;
+    virtual RGBColor shade(ShadeInfo &sinfo) override;
 
     // Access Methods
     void set_ka(const float ka);

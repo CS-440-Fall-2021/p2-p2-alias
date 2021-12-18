@@ -6,9 +6,9 @@ Acceleration::Acceleration(){
 
 }
 
-bool Acceleration::shadow_hit(Ray&, float&){
-    return false;
-}
+// bool Acceleration::shadow_hit(Ray&, float&){
+//     return false;
+// }
 
 Point3D Acceleration::min_coordinates(void)
 {

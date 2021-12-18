@@ -10,7 +10,7 @@ class Phong: public Material{
     public:
         Phong(void);
         Phong(Lambertian* , Lambertian* , GlossySpecular*);
-        virtual RGBColor shade(ShadeInfo& sr);
+        virtual RGBColor shade(ShadeInfo& sr) override;
     protected:
         Lambertian* ambient_brdf;
         Lambertian* diffuse_brdf;

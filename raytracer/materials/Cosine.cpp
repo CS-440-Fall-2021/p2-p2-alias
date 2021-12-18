@@ -27,7 +27,7 @@ Cosine &Cosine::operator=(const Cosine &other){
     return *this;
 }
 
-RGBColor Cosine::shade(const ShadeInfo &sinfo) const{
+RGBColor Cosine::shade(ShadeInfo &sinfo){
     RGBColor r = color * (sinfo.normal * (-sinfo.ray.d));
     return r;
 }

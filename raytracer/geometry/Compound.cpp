@@ -111,7 +111,7 @@ Compound::copy_objects(const vector<Geometry*>& rhs_ojects) {
 //------------------------------------------------------------------ hit
 
 bool 															 
-Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) {
+Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 	float	t; 
 	Vector3D normal;
 	Point3D	local_hit_point;

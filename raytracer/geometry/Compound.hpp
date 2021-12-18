@@ -42,7 +42,7 @@ class Compound: public Geometry {
 		int
 		get_num_objects(void);						
 
-		virtual bool hit(const Ray& ray, float& tmin, ShadeInfo& s);
+		virtual bool hit(const Ray& ray, float& tmin, ShadeInfo& s) const;
  
 		virtual BBox getBBox() const override;
 	protected:		
@@ -56,6 +56,8 @@ class Compound: public Geometry {
 
 		void												
 		copy_objects(const vector<Geometry*>& rhs_objects);
+
+		// mutable Material *material_ptr;
 	
 };
 

@@ -12,6 +12,12 @@ class Acceleration : public Compound
 {
 public:
     Acceleration();
+    Acceleration(int nx_, int ny_, int nz_);
+
+    Acceleration(Acceleration &) = default;
+    Acceleration &operator=(Acceleration &) = default;
+
+    ~Acceleration() = default;
     // other constructors, etc.
     // BBox
     // getBBox(void);

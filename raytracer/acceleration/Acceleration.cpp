@@ -3,11 +3,10 @@
 
 Acceleration::Acceleration(){
     Compound();
-
 }
 
-bool Acceleration::shadow_hit(Ray&, float&){
-    return false;
+Acceleration::Acceleration(int nx_, int ny_, int nz_): nx(nx_), ny(ny_), nz(nz_){
+    Compound();
 }
 
 Point3D Acceleration::min_coordinates(void)
@@ -30,7 +29,6 @@ Point3D Acceleration::min_coordinates(void)
     p0.z -= kEpsilon;
     return (p0);
 }
-
 
 Point3D Acceleration::max_coordinates(void)
 {

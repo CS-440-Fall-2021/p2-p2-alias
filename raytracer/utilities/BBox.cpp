@@ -1,118 +1,172 @@
 #include "BBox.hpp"
-
-
+#include "../utilities/Constants.hpp"
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 
-BBox::BBox(const Point3D& min, const Point3D& max){
-  pmin = min;
-  pmax = max;
+BBox::BBox(const Point3D &min, const Point3D &max)
+{
+    pmin = min;
+    pmax = max;
 }
 
-std::string BBox::to_string() const{
-  return ("BBox min point: " + pmin.to_string() + ", max point: " + pmax.to_string());
+std::string BBox::to_string() const
+{
+    return ("BBox min point: " + pmin.to_string() + ", max point: " + pmax.to_string());
 }
 
-bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const{
+bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const
+{
 
-  float tx_enter = (pmin.x - ray.o.x)/ ray.d.x ;
-  float tx_leave = (pmax.x - ray.o.x)/ ray.d.x ;
+    double ox = ray.o.x;
+    double oy = ray.o.y;
+    double oz = ray.o.z;
+    double dx = ray.d.x;
+    double dy = ray.d.y;
+    double dz = ray.d.z;
+    double tx_min, ty_min, tz_min;
+    double tx_max, ty_max, tz_max;
+    double a = 1.0 / dx;
 
-  float ty_enter = (pmin.y - ray.o.y)/ ray.d.y ;
-  float ty_leave = (pmax.y - ray.o.y)/ ray.d.y ;
+    if (a >= 0)
+    {
+        tx_min = (pmin.x - ox) * a;
+        tx_max = (pmax.x - ox) * a;
+    }
+    else
+    {
+        tx_min = (pmax.x - ox) * a;
+        tx_max = (pmin.x - ox) * a;
+    }
+    double b = 1.0 / dy;
+    if (b >= 0)
+    {
+        ty_min = (pmin.y - oy) * b;
+        ty_max = (pmax.y - oy) * b;
+    }
+    else
+    {
+        ty_min = (pmax.y - oy) * b;
+        ty_max = (pmin.y - oy) * b;
+    }
+    double c = 1.0 / dz;
+    if (c >= 0)
+    {
+        tz_min = (pmin.z - oz) * c;
+        tz_max = (pmax.z - oz) * c;
+    }
+    else
+    {
+        tz_min = (pmax.z - oz) * c;
+        tz_max = (pmin.z - oz) * c;
+    }
 
-  float tz_enter = (pmin.z - ray.o.z)/ ray.d.z ;
-  float tz_leave = (pmax.z - ray.o.z)/ ray.d.z ;
-
-  // Find the largest entering t value 
-  float tmax_enter = MAX(tx_enter,MAX(ty_enter,tz_enter));
-  // Find the smallest leaving t value 
-  float tmin_leave = MIN(tx_leave,MIN(ty_leave,tz_leave));
-
-  // If largest entering t < Smallest leaving t, hit has occured
-  if (tmax_enter < tmin_leave){
-    t_exit = tmin_leave;
-    t_enter = tmax_enter;
-    return true;
-  }
-  else{
-    return false;
-  }
-
+    // find largest entering t value
+    if (tx_min > ty_min)
+        t_enter = tx_min;
+    else
+        t_enter = ty_min;
+    if (tz_min > t_enter)
+        t_enter = tz_min;
+    // find smallest exiting t value
+    if (tx_max < ty_max)
+        t_exit = tx_max;
+    else
+        t_exit = ty_max;
+    if (tz_max < t_exit)
+        t_exit = tz_max;
+    return (t_enter < t_exit && t_exit > kEpsilon);
 }
 
-void BBox::extend(Geometry* g){
-  extend(g->getBBox());
+void BBox::extend(Geometry *g)
+{
+    extend(g->getBBox());
 }
 
-void BBox::extend(const BBox& b){
-  pmin = min(b.pmin,pmin);
-  pmax = max(b.pmax,pmax);
+void BBox::extend(const BBox &b)
+{
+    pmin = min(b.pmin, pmin);
+    pmax = max(b.pmax, pmax);
 }
 
-bool BBox::contains(const Point3D& p) const{
+bool BBox::contains(const Point3D &p) const
+{
     if (pmin.x <= p.x && p.x <= pmax.x &&
         pmin.y <= p.y && p.y <= pmax.y &&
         pmin.z <= p.z && p.z <= pmax.z)
     {
         return true;
     }
-    else {
+    else
+    {
         return false;
     }
 }
 
-bool BBox::overlaps(Geometry* g){
+bool BBox::overlaps(Geometry *g)
+{
     return this->overlaps(g->getBBox());
 }
 
-bool BBox::overlaps(const BBox& b){
+bool BBox::overlaps(const BBox &b)
+{
 
     // Check overlap in x slap
     // If calling BBox is ahead along x-axis of b BBox
-    if (pmax.x >= b.pmax.x){
+    if (pmax.x >= b.pmax.x)
+    {
         // If calling BBox's back along x-axis is behind of b BBox's front along x-axis
-        if (pmin.x > b.pmax.x){
+        if (pmin.x > b.pmax.x)
+        {
             return false;
         }
     }
-    // If b BBox is behind along x-axis of calling BBox  
-    else {
+    // If b BBox is behind along x-axis of calling BBox
+    else
+    {
         // If b BBox's back along x-axis is behind of calling BBox's front along x-axis
-        if (b.pmax.x > pmin.x){
+        if (b.pmax.x > pmin.x)
+        {
             return false;
         }
     }
 
     // Check overlap in y slap
     // If calling BBox is ahead along y-axis of b BBox
-    if (pmax.y >= b.pmax.y){
+    if (pmax.y >= b.pmax.y)
+    {
         // If calling BBox's back along y-axis is behind of b BBox's front along y-axis
-        if (pmin.y > b.pmax.y){
+        if (pmin.y > b.pmax.y)
+        {
             return false;
         }
     }
-    // If b BBox is behind along y-axis of calling BBox  
-    else {
+    // If b BBox is behind along y-axis of calling BBox
+    else
+    {
         // If b BBox's back along y-axis is behind of calling BBox's front along y-axis
-        if (b.pmax.y > pmin.y){
+        if (b.pmax.y > pmin.y)
+        {
             return false;
         }
     }
 
     // Check overlap in z slab
     // If calling BBox is ahead along z-axis of b BBox
-    if (pmax.z >= b.pmax.z){
+    if (pmax.z >= b.pmax.z)
+    {
         // If calling BBox's back along x-axis is behind of b BBox's front along x-axis
-        if (pmin.z > b.pmax.z){
+        if (pmin.z > b.pmax.z)
+        {
             return false;
         }
     }
-    // If b BBox is behind along x-axis of calling BBox  
-    else {
+    // If b BBox is behind along x-axis of calling BBox
+    else
+    {
         // If b BBox's back along x-axis is behind of calling BBox's front along x-axis
-        if (b.pmax.z > pmin.z){
+        if (b.pmax.z > pmin.z)
+        {
             return false;
         }
     }

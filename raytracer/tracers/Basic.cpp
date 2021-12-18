@@ -7,7 +7,7 @@ Basic::Basic(): Tracer() {
 Basic::Basic(World* w): Tracer(w) {
 }
 
-RGBColor Basic::trace_ray(const Ray &ray){
+RGBColor Basic::trace_ray(const Ray &ray, const int depth){
     RGBColor pixel_color(0);
 
     float weight = ray.w; // ray weight for the pixel.

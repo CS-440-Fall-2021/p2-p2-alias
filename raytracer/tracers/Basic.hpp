@@ -13,5 +13,5 @@ class Basic : public Tracer {
         Basic(const Basic&) = default;
         Basic &operator=(const Basic&) = default;
 
-        RGBColor trace_ray(const Ray &ray);
+        RGBColor trace_ray(const Ray &ray, const int depth);
 };

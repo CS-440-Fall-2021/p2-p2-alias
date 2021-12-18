@@ -34,7 +34,7 @@ void Pinhole::render_scene(World &w){
             rays = sampler->get_rays(x, y);
             // std::cout << rays[0].to_string();
             for (const auto &ray : rays) {
-                pixel_color += w.tracer_ptr->trace_ray(ray);
+                pixel_color += w.tracer_ptr->trace_ray(ray, 0);
             }
             // Save color to image.
             image.set_pixel(x, y, pixel_color);

@@ -18,5 +18,5 @@ class Tracer{
 
         virtual ~Tracer() = default;
 
-        virtual RGBColor trace_ray(const Ray &ray) = 0;
+        virtual RGBColor trace_ray(const Ray &ray, const int depth) = 0;
 };

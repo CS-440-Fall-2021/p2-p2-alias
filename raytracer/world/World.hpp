@@ -16,6 +16,7 @@
 #include "../utilities/ShadeInfo.hpp"
 #include "../geometry/Geometry.hpp"
 #include "../acceleration/Acceleration.hpp"
+#include "../lights/Light.hpp"
 #include "ViewPlane.hpp"
 
 class Camera;
@@ -35,7 +36,7 @@ public:
   Tracer *tracer_ptr;
   Acceleration* accel;
   Light* ambient_ptr;
-  vector<Light*> lights;
+  std::vector<Light*> lights;
 
 public:
   // Constructors.

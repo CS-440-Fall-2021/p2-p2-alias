@@ -6,6 +6,10 @@ Acceleration::Acceleration(){
 
 }
 
+bool Acceleration::shadow_hit(Ray&, float&){
+    return false;
+}
+
 Point3D Acceleration::min_coordinates(void)
 {
     BBox bbox;
@@ -168,4 +172,6 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
         iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
     }
+
+    return false;
 }

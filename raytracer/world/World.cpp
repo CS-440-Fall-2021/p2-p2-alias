@@ -7,14 +7,18 @@ World::World(){
 
 }
 
-World::~World(){
-    
+World::~World(){   
     
 }
 
 void World::add_geometry(Geometry *geom_ptr){
     geometry.push_back(geom_ptr);
 }
+
+void World::add_light(Light* light_ptr){
+    lights.push_back(light_ptr);
+}
+
 void World::set_camera(Camera *c_ptr){
     camera_ptr = c_ptr;
 }

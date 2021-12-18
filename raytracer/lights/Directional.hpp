@@ -3,7 +3,7 @@
 #include "Light.hpp"
 
 class Directional : public Light{
-    private:
+    protected:
         float ls;
         RGBColor color;
         Vector3D dir;

@@ -9,5 +9,5 @@ class GlossySpecular{
         float exp;
     
     public:
-        virtual RGBColor f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo);
+        virtual RGBColor f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const;
 };

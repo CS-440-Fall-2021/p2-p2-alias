@@ -1,4 +1,5 @@
 #include "GlossySpecular.hpp"
+#include <math.h>
 
 RGBColor GlossySpecular::f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const {
     RGBColor L; 

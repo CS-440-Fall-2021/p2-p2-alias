@@ -12,22 +12,23 @@
 
 void World::build(void)
 {   
-    vplane.top_left.x = 3;
+    vplane.top_left.x = -3;
     vplane.top_left.y = 3;
     vplane.top_left.z = 3;
     vplane.bottom_right.x = 3;
     vplane.bottom_right.y = -3;
-    vplane.bottom_right.z = -3;
+    vplane.bottom_right.z = 3;
     vplane.hres = 400;
     vplane.vres = 400;
 
     tracer_ptr = new Basic(this);
-    Acceleration* grid_ptr = new Acceleration;
+    Acceleration* grid_ptr = new Acceleration(50, 50, 50);
+    
     
     bg_color = black;  // background color.
     
     // camera and sampler.
-    Camera *cam = new Pinhole(Point3D(6, 0, 0), Point3D(3, 0, 0), 3);
+    Camera *cam = new Pinhole(Point3D(0, 0, 10), Point3D(0, 0, 0), 7);
     cam->compute_uvw();
     set_camera(cam);
     sampler_ptr = new Simple(camera_ptr, &vplane);
@@ -61,8 +62,8 @@ void World::build(void)
 
     RGBColor grey(0.25);  // grey
     
-    Plane* plane_ptr = new Plane(Point3D(-5, 3, 3), Vector3D(1, 0, 0));
-    plane_ptr->set_material(new Cosine(grey));
-    add_geometry(plane_ptr);
-    grid_ptr->add_object(plane_ptr);
+    // Plane* plane_ptr = new Plane(Point3D(-5, 3, 3), Vector3D(1, 0, 0));
+    // plane_ptr->set_material(new Cosine(grey));
+    // add_geometry(plane_ptr);
+    // grid_ptr->add_object(plane_ptr);
 }

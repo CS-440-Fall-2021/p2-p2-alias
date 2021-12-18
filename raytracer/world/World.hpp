@@ -34,6 +34,8 @@ public:
   Sampler *sampler_ptr;
   Tracer *tracer_ptr;
   Acceleration* accel;
+  Light* ambient_ptr;
+  vector<Light*> lights;
 
 public:
   // Constructors.
@@ -44,6 +46,7 @@ public:
 
   // Add to the scene.
   void add_geometry(Geometry *geom_ptr);
+  void add_light(Light* light_ptr);
   void set_camera(Camera *c_ptr);
   void set_tracer(Tracer *t_ptr);
 

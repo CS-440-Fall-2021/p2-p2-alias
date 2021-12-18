@@ -41,4 +41,6 @@ public:
 
   // Get bounding box.
   virtual BBox getBBox() const = 0;
+
+  virtual void add_object(Geometry* object_ptr); 
 };

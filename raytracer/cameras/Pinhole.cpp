@@ -41,7 +41,7 @@ void Pinhole::render_scene(World &w){
         }
     }
     // Write image to file.
-    image.write_ppm("scene1.ppm");
+    image.write_ppm("scene.ppm");
     
     std::cout << "Scene Rendered";
 

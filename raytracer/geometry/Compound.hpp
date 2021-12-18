@@ -13,7 +13,6 @@
 #include "../utilities/ShadeInfo.hpp"
 #include "../utilities/Ray.hpp"
 #include "../utilities/BBox.hpp"
-using namespace std;
 //-------------------------------------------------------------------------------- class Compound
 
 class Compound: public Geometry {	
@@ -47,7 +46,7 @@ class Compound: public Geometry {
 		virtual BBox getBBox() const override;
 	protected:		
 		
-		vector<Geometry*> objects;
+		std::vector<Geometry*> objects;
 		
 	private:
 	
@@ -55,7 +54,7 @@ class Compound: public Geometry {
 		delete_objects(void);								
 
 		void												
-		copy_objects(const vector<Geometry*>& rhs_objects);
+		copy_objects(const std::vector<Geometry*>& rhs_objects);
 	
 };
 

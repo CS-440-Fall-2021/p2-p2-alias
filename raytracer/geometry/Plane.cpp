@@ -1,7 +1,5 @@
 #include "Plane.hpp"
-#include "../utilities/ShadeInfo.hpp"
-#include <string>
-#include <iostream>
+
 
 Plane::Plane(){
     n = Vector3D(0, 1.0, 0);

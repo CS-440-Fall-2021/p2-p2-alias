@@ -4,16 +4,8 @@
 //	See the file COPYING.txt for the full license.
 
 
-#include "../utilities/Point3D.hpp"
-#include "../utilities/Vector3D.hpp"
-#include "../utilities/BBox.hpp"
-#include "../utilities/Ray.hpp"
-#include "../utilities/Constants.hpp"
-#include "../utilities/ShadeInfo.hpp"
-#include <vector> 
-#include "Compound.hpp"
-using namespace std;
 
+#include "Compound.hpp"
 					
 
 // ----------------------------------------------------------------  default constructor
@@ -106,14 +98,14 @@ Compound::delete_objects(void) {
 
 //------------------------------------------------------------------ copy_objects
 
-// void
-// Compound::copy_objects(const vector<Geometry*>& rhs_ojects) {
-// 	delete_objects();    	
-// 	int num_objects = rhs_ojects.size();
+void
+Compound::copy_objects(const vector<Geometry*>& rhs_ojects) {
+	// delete_objects();    	
+	// int num_objects = rhs_ojects.size();
 	
-// 	for (int j = 0; j < num_objects; j++)
-// 		objects.push_back(rhs_ojects[j]->clone());
-// }
+	// for (int j = 0; j < num_objects; j++)
+	// 	objects.push_back(rhs_ojects[j]->clone());
+}
 
 
 //------------------------------------------------------------------ hit
@@ -131,7 +123,7 @@ Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 		if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
 			hit				= true;
 			tmin 			= t;
-			Material* material_ptr	= objects[j]->get_material();	// lhs is GeometricObject::material_ptr
+			material_ptr = (objects[j]->get_material());
 			normal			= sr.normal;
 			local_hit_point	= sr.hit_point;  
 		}
@@ -146,6 +138,9 @@ Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 }
 
 BBox Compound::getBBox() const {
-    
+	BBox bbox;
+	for (const auto &g: objects){
+		bbox.extend(g);
+	}
+    return bbox;
 };
-

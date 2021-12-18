@@ -7,6 +7,12 @@
 
 #include <vector> 
 #include "Geometry.hpp"
+#include "../utilities/Constants.hpp"
+#include "../utilities/Point3D.hpp"
+#include "../utilities/Vector3D.hpp"
+#include "../utilities/ShadeInfo.hpp"
+#include "../utilities/Ray.hpp"
+#include "../utilities/BBox.hpp"
 using namespace std;
 //-------------------------------------------------------------------------------- class Compound
 
@@ -50,6 +56,8 @@ class Compound: public Geometry {
 
 		void												
 		copy_objects(const vector<Geometry*>& rhs_objects);
+
+		// mutable Material *material_ptr;
 	
 };
 

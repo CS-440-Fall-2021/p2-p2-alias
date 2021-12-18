@@ -54,7 +54,13 @@ class Compound: public Geometry {
 		delete_objects(void);								
 
 		void												
+<<<<<<< HEAD
 		copy_objects(const std::vector<Geometry*>& rhs_objects);
+=======
+		copy_objects(const vector<Geometry*>& rhs_objects);
+
+		// mutable Material *material_ptr;
+>>>>>>> fad2d47f7362f5e1759833d7a44cbfc191d9f942
 	
 };
 

@@ -1,4 +1,10 @@
-#include "Grid.hpp"
+#include "Acceleration.hpp"
+#include <math.h>
+
+Acceleration::Acceleration(){
+    Compound();
+
+}
 
 Point3D Acceleration::min_coordinates(void)
 {
@@ -151,18 +157,15 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
 
     int ix, iy, iz;
 
-    BBox bbox = getBBox();
-
-    if (bbox.inside(ray.o)) {
-    ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
-    iy = clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1);
-    iz = clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1);
+    if (bbox.contains(ray.o)) {
+        ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
+        iy = clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1);
+        iz = clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1);
     }
     else {
     Point3D p = ray.o + t0 * ray.d;
-    ix = clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1);
-    iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
-    iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
-
+        ix = clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1);
+        iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
+        iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
     }
 }

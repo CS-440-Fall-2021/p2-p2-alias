@@ -15,7 +15,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../geometry/Geometry.hpp"
-#include "../acceleration/Grid.hpp"
+#include "../acceleration/Acceleration.hpp"
 #include "ViewPlane.hpp"
 
 class Camera;

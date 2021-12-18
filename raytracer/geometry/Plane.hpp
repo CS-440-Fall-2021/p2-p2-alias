@@ -14,6 +14,9 @@
 #include "../utilities/BBox.hpp"
 #include "../utilities/Ray.hpp"
 #include "../utilities/Constants.hpp"
+#include "../utilities/ShadeInfo.hpp"
+#include <string>
+#include <iostream>
 
 #include <limits>
 #define inf std::numeric_limits<float>::infinity()

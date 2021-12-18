@@ -4,16 +4,8 @@
 //	See the file COPYING.txt for the full license.
 
 
-#include "../utilities/Point3D.hpp"
-#include "../utilities/Vector3D.hpp"
-#include "../utilities/BBox.hpp"
-#include "../utilities/Ray.hpp"
-#include "../utilities/Constants.hpp"
-#include "../utilities/ShadeInfo.hpp"
-#include <vector> 
-#include "Compound.hpp"
-using namespace std;
 
+#include "Compound.hpp"
 					
 
 // ----------------------------------------------------------------  default constructor
@@ -106,14 +98,14 @@ Compound::delete_objects(void) {
 
 //------------------------------------------------------------------ copy_objects
 
-// void
-// Compound::copy_objects(const vector<Geometry*>& rhs_ojects) {
-// 	delete_objects();    	
-// 	int num_objects = rhs_ojects.size();
+void
+Compound::copy_objects(const vector<Geometry*>& rhs_ojects) {
+	// delete_objects();    	
+	// int num_objects = rhs_ojects.size();
 	
-// 	for (int j = 0; j < num_objects; j++)
-// 		objects.push_back(rhs_ojects[j]->clone());
-// }
+	// for (int j = 0; j < num_objects; j++)
+	// 	objects.push_back(rhs_ojects[j]->clone());
+}
 
 
 //------------------------------------------------------------------ hit
@@ -146,6 +138,5 @@ Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 }
 
 BBox Compound::getBBox() const {
-    
+    return BBox();
 };
-

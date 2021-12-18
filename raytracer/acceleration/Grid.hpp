@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../utilities/Point3D.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../utilities/BBox.hpp"

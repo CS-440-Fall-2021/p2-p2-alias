@@ -113,7 +113,7 @@ There is a lot to handle and there are bound to be confusions and queries. Pleas
 1. Goto ray tracer directory from root with : 
     cd raytracer
 2. Compile with:
-    g++ -o raytracer.exe raytracer.cpp ./utilities/*.cpp ./world/*.cpp ./cameras/*.cpp ./geometry/*.cpp ./materials/*.cpp ./samplers/*.cpp ./build/buildChapter14.cpp
+    g++ -o raytracer.exe raytracer.cpp ./utilities/*.cpp ./world/*.cpp ./cameras/*.cpp  ./geometry/*.cpp ./materials/*.cpp ./samplers/*.cpp ./lights/*.cpp ./BRDF/*.cpp ./build/buildChapter14.cpp
 
     g++ -o raytracer.exe raytracer.cpp ./utilities/*.cpp ./world/*.cpp ./cameras/*.cpp ./geometry/*.cpp ./materials/*.cpp ./samplers/*.cpp ./build/buildHelloWorld.cpp
     

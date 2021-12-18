@@ -1,10 +1,10 @@
-#include "../raytracer/utilities/Point3D.hpp"
-#include "../raytracer/utilities/Vector3D.hpp"
-#include "../raytracer/utilities/BBox.hpp"
-#include "../raytracer/utilities/Ray.hpp"
-#include "../raytracer/utilities/Constants.hpp"
+#include "../utilities/Point3D.hpp"
+#include "../utilities/Vector3D.hpp"
+#include "../utilities/BBox.hpp"
+#include "../utilities/Ray.hpp"
+#include "../utilities/Constants.hpp"
 #include <vector> 
-#include "../raytracer/geometry/Compound.hpp"
+#include "../geometry/Compound.hpp"
 using namespace std;
 
 class Acceleration : public Compound

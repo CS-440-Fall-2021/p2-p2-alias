@@ -123,7 +123,7 @@ Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 		if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
 			hit				= true;
 			tmin 			= t;
-			Material* material_ptr	= objects[j]->get_material();	// lhs is GeometricObject::material_ptr
+			material_ptr = (objects[j]->get_material());
 			normal			= sr.normal;
 			local_hit_point	= sr.hit_point;  
 		}
@@ -138,5 +138,9 @@ Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 }
 
 BBox Compound::getBBox() const {
-    return BBox();
+	BBox bbox;
+	for (const auto &g: objects){
+		bbox.extend(g);
+	}
+    return bbox;
 };

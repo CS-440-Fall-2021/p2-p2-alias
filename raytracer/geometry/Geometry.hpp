@@ -16,7 +16,7 @@ class ShadeInfo;
 
 class Geometry {
 protected:
-  Material *material_ptr; // this object's material.
+  mutable Material *material_ptr; // this object's material.
 
 public:
   // Constructors.

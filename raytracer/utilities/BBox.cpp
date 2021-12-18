@@ -11,7 +11,11 @@ BBox::BBox(const Point3D& min, const Point3D& max){
 }
 
 std::string BBox::to_string() const{
+<<<<<<< HEAD
   return ("BBox min point: " + pmin.to_string() + ", max point: "+ pmax.to_string());
+=======
+  return ("BBox min point: " + pmin.to_string() + ", max point: " + pmax.to_string());
+>>>>>>> fad2d47f7362f5e1759833d7a44cbfc191d9f942
 }
 
 bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const{

@@ -1,6 +1,6 @@
 #include "AmbientLight.hpp"
 
-AmbientLight::AmbientLight(): ls(1), color(){
+AmbientLight::AmbientLight(): ls(1), color(1){
 }
 
 AmbientLight::AmbientLight(float l, RGBColor col): ls(l), color(col){

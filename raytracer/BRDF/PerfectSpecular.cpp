@@ -13,3 +13,19 @@ RGBColor PerfectSpecular::f(const ShadeInfo& sr, const Vector3D& wi, const Vecto
 RGBColor PerfectSpecular::rho(const ShadeInfo& sr, const Vector3D& wo) const{
     return RGBColor(); // return black color
 }
+
+void PerfectSpecular::set_kr(const float _kr){
+    kr = _kr;
+}
+
+void PerfectSpecular::set_cr(const RGBColor& _cr){
+    cr = _cr;
+}
+
+float PerfectSpecular::get_kr() const{
+    return kr;
+}
+
+RGBColor PerfectSpecular::get_cr() const{
+    return cr;
+}

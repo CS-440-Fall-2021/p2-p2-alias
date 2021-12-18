@@ -15,6 +15,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../geometry/Geometry.hpp"
+#include "../lights/Light.hpp"
 #include "../acceleration/Acceleration.hpp"
 #include "ViewPlane.hpp"
 
@@ -35,7 +36,7 @@ public:
   Tracer *tracer_ptr;
   Acceleration* accel;
   Light* ambient_ptr;
-  vector<Light*> lights;
+  std::vector<Light*> lights;
 
 public:
   // Constructors.

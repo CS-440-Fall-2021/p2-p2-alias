@@ -20,7 +20,7 @@ Vector3D Camera::ray_direction(const Point3D& pixel_point,
 
 
 void Camera::compute_uvw(){
-    w = lookat - eye;
+    w = eye - lookat;
     w.normalize();
     u = up ^ w;
     u.normalize();

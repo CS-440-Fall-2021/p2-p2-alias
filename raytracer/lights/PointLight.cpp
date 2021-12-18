@@ -1,6 +1,6 @@
 #include "PointLight.hpp"
 
-PointLight::PointLight(): ls(1), color(), location(){
+PointLight::PointLight(): ls(1), color(1), location(){
 }
 
 PointLight::PointLight(float l, RGBColor col, Vector3D loc): ls(l), color(col), location(loc){

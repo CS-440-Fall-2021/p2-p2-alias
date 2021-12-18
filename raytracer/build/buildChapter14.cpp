@@ -7,7 +7,7 @@
    Courtesy Kevin Suffern.
 */
 
-#include "../acceleration/Grid.hpp"
+#include "../acceleration/Acceleration.hpp"
 
 #include "../cameras/Parallel.hpp"
 #include "../cameras/Pinhole.hpp"

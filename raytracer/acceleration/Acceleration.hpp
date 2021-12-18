@@ -11,13 +11,13 @@
 class Acceleration : public Compound
 {
 public:
-    Acceleration(void);
+    Acceleration();
     // other constructors, etc.
     // BBox
     // getBBox(void);
     void
     setup_cells(void);
-    virtual bool hit(Ray &ray, float &tmin, ShadeInfo &s);
+    virtual bool hit(const Ray &ray, float &tmin, ShadeInfo &s) const;
     virtual bool
     shadow_hit(Ray &ray, float &tmin);
 
@@ -29,5 +29,4 @@ private:
     min_coordinates(void);
     Point3D // compute maximum grid coordinates
     max_coordinates(void);
-    bool hit(const Ray& ray, float& tmin, ShadeInfo& s) const;
 };

@@ -43,7 +43,7 @@ public:
   void extend(const BBox& b);
 
   // Does this BBox contain p? True even when p lies on a boundary.
-  bool contains(const Point3D& p);
+  bool contains(const Point3D& p) const;
   
   // Does this BBox overlap with g or b?
   bool overlaps(Geometry* g);

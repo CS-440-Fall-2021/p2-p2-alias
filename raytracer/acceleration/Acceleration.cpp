@@ -160,6 +160,21 @@ counts.erase (counts.begin(), counts.end());
 bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
 
     int ix, iy, iz;
+    float x0 = bbox.pmin.x;
+    float y0 = bbox.pmin.y;
+    float z0 = bbox.pmin.z;
+    float x1 = bbox.pmax.x;
+    float y1 = bbox.pmax.y;
+    float z1 = bbox.pmax.z;
+
+    float ox = ray.o.x;
+    float oy = ray.o.y;
+    float oz = ray.o.z;
+
+    float t0, t1 = 0;
+
+    if (! bbox.hit(ray, t0, t1))
+        return false;
 
     if (bbox.contains(ray.o)) {
         ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
@@ -173,5 +188,70 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
     }
 
-    return false;
+    float tx_min = (x0 - ox) / ray.d.x;
+    float tx_max = (x1 - ox) / ray.d.x;
+    float ty_min = (y0 - oy) / ray.d.y;
+    float ty_max = (y1 - oy) / ray.d.y;
+    float tz_min = (z0 - oz) / ray.d.z;
+    float tz_max = (z1 - oz) / ray.d.z;
+
+    float dtx = (tx_max - tx_min) / nx;
+    float dty = (ty_max - ty_min) / ny;
+    float dtz = (tz_max - tz_min) / nz;
+    
+    float tx_next, ty_next, tz_next;
+    
+    int ix_step, iy_step, iz_step;
+    int ix_stop, iy_stop, iz_stop;
+
+    tx_next = tx_min + (ix + 1) * dtx;
+    ix_step = +1;
+    ix_stop = nx;
+    
+    ty_next = ty_min + (iy + 1) * dty;
+    iy_step = +1;
+    iy_stop = ny;
+    
+    tz_next = tz_min + (iz + 1) * dtz;
+    iz_step = +1;
+    iz_stop = nz;
+
+    while (true) {
+        Geometry* object_ptr = cells[ix + nx * iy + nx * ny * iz];
+        if (tx_next < ty_next && tx_next < tz_next) {
+            if (object_ptr && object_ptr->hit(ray, tmin, s) && tmin < tx_next) {
+            material_ptr = object_ptr->get_material();
+            return (true);
+            }
+            tx_next += dtx;
+            ix += ix_step;
+            if (ix == ix_stop)
+                return (false);
+        }
+        else {
+            if (ty_next < tz_next) {
+                if (object_ptr && object_ptr->hit(ray, tmin, s) && tmin < ty_next) {
+                    material_ptr = object_ptr->get_material();
+                    return (true);
+                }
+                ty_next += dty;
+                iy += iy_step;
+                if (iy == iy_stop)
+                    return (false);
+            }
+            else {
+                if (object_ptr && object_ptr->hit(ray, tmin, s) && tmin < tz_next) {
+                    material_ptr = object_ptr->get_material();
+                    return (true);
+                }
+                tz_next += dtz;
+                iz += iz_step;
+
+                if (iz == iz_stop)
+                    return (false);
+            }
+        }
+    }
 }
+
+bool Acceleration::shadow_hit(Ray &ray, float &tmin){return false;}

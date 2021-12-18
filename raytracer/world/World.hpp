@@ -15,6 +15,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../geometry/Geometry.hpp"
+#include "../lights/Light.hpp"
 #include "../acceleration/Acceleration.hpp"
 #include "../lights/Light.hpp"
 #include "ViewPlane.hpp"

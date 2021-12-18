@@ -32,6 +32,8 @@ bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const{
 
   // If largest entering t < Smallest leaving t, hit has occured
   if (tmax_enter < tmin_leave){
+    t_exit = tmin_leave;
+    t_enter = tmax_enter;
     return true;
   }
   else{

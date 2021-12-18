@@ -99,7 +99,7 @@ Compound::delete_objects(void) {
 //------------------------------------------------------------------ copy_objects
 
 void
-Compound::copy_objects(const vector<Geometry*>& rhs_ojects) {
+Compound::copy_objects(const std::vector<Geometry*>& rhs_ojects) {
 	// delete_objects();    	
 	// int num_objects = rhs_ojects.size();
 	

@@ -19,7 +19,6 @@ Vector3D Camera::ray_direction(const Point3D& pixel_point,
                                 const Point3D& lens_point) const{return Vector3D();}
 
 
-
 void Camera::compute_uvw(){
     w = lookat - eye;
     w.normalize();

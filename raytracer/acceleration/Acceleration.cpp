@@ -1,4 +1,10 @@
-#include "Grid.hpp"
+#include "Acceleration.hpp"
+#include <math.h>
+
+Acceleration::Acceleration(){
+    Compound();
+
+}
 
 Point3D Acceleration::min_coordinates(void)
 {
@@ -18,6 +24,28 @@ Point3D Acceleration::min_coordinates(void)
     p0.x -= kEpsilon;
     p0.y -= kEpsilon;
     p0.z -= kEpsilon;
+    return (p0);
+}
+
+
+Point3D Acceleration::max_coordinates(void)
+{
+    BBox bbox;
+    Point3D p0(kEpsilon);
+    int num_objects = objects.size();
+    for (int j = 0; j < num_objects; j++)
+    {
+        bbox = objects[j]->getBBox();
+        if (bbox.pmax.x > p0.x)
+            p0.x = bbox.pmax.x;
+        if (bbox.pmax.y > p0.y)
+            p0.y = bbox.pmax.y;
+        if (bbox.pmax.z > p0.z)
+            p0.z = bbox.pmax.z;
+    }
+    p0.x += kEpsilon;
+    p0.y += kEpsilon;
+    p0.z += kEpsilon;
     return (p0);
 }
 
@@ -55,7 +83,7 @@ void Acceleration::setup_cells(void)
     for (int j = 0; j < num_cells; j++)
         cells.push_back(NULL);
     // set up a temporary array to hold the number of objects stored in each cell
-    vector<int> counts;
+    std::vector<int> counts;
     counts.reserve(num_cells);
     for (int j = 0; j < num_cells; j++)
         counts.push_back(0);
@@ -123,3 +151,21 @@ objects.erase (objects.begin(), objects.end());
 counts.erase (counts.begin(), counts.end());
 }
 
+
+
+bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
+
+    int ix, iy, iz;
+
+    if (bbox.contains(ray.o)) {
+        ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
+        iy = clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1);
+        iz = clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1);
+    }
+    else {
+    Point3D p = ray.o + t0 * ray.d;
+        ix = clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1);
+        iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
+        iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
+    }
+}

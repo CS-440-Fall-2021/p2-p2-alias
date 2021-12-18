@@ -11,18 +11,18 @@
 class Acceleration : public Compound
 {
 public:
-    Acceleration(void);
+    Acceleration();
     // other constructors, etc.
-    virtual BBox
-    get_bounding_box(void);
+    // BBox
+    // getBBox(void);
     void
     setup_cells(void);
-    virtual bool hit(Ray &ray, float &tmin, ShadeInfo &s);
+    virtual bool hit(const Ray &ray, float &tmin, ShadeInfo &s) const;
     virtual bool
     shadow_hit(Ray &ray, float &tmin);
 
 private:
-    vector<Compound*> cells; // cells are stored in a 1D array
+    std::vector<Geometry*> cells; // cells are stored in a 1D array
     BBox bbox;                       // bounding box
     int nx, ny, nz;                  // number of cells in the x-, y-, and z-directions
     Point3D                          // compute minimum grid coordinates

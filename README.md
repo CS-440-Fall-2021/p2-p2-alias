@@ -120,3 +120,5 @@ There is a lot to handle and there are bound to be confusions and queries. Pleas
     
 3. Run with:
     .\main.exe
+
+4. Open Scene.ppm

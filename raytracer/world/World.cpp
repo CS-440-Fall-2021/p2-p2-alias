@@ -49,7 +49,7 @@ void World::set_tracer(Tracer *t_ptr){
     tracer_ptr = t_ptr;
 }
 
-void World::load_OBJ(const char* file_name){
+void World::load_OBJ(const char* file_name, Material * material_ptr){
     //Vertex portions
 	std::vector<Point3D> vertex_positions;
 
@@ -123,15 +123,17 @@ void World::load_OBJ(const char* file_name){
 	Triangle* triangle_ptr;
 	Point3D v0,v1,v2;
 	//Load in all indices
-	for (size_t i = 0; i < vertex_position_indicies.size(); ++i)
-	{
-		v0 = vertex_positions[vertex_position_indicies[i]-1];
-		v1 = vertex_positions[vertex_position_indicies[i+1]-1];
-		v2 = vertex_positions[vertex_position_indicies[i+2]-1];
+	for (auto it = vertex_position_indicies.begin(); it != (vertex_position_indicies.end()-3); it+=3) {
+		std::cout<<"it: "<< *it << std::endl;
+		v0 = vertex_positions.at(*it-1);
+		v1 = vertex_positions.at(*(it+1)-1);
+		v2 = vertex_positions.at(*(it+2)-1);
  		triangle_ptr = new Triangle(v0, v1, v2);
+		triangle_ptr->set_material(matte_ptr);
         // add_geometry(triangle_ptr);
-		grid_ptr->add_object(triangle_ptr);
+		grid_ptr->add_object(triangle_ptr);	
 	}
+	grid_ptr->setup_cells(); // must be called after all adding all triangles
 	//Loaded success
 	std::cout << "OBJ file loaded!" << "\n";
 }

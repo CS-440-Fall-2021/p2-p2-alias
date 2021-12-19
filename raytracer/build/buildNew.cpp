@@ -30,9 +30,21 @@
 
 void
 World::build(void) {
-  std::vector<Point3D> vertices;
-  std::vector<Vector3D> normals;
-  Acceleration *g_ptr = new Acceleration(50, 50, 50);
+  vplane.top_left.x = -2;
+  vplane.top_left.y = 2;
+  vplane.top_left.z = 3;
+  vplane.bottom_right.x = 2;
+  vplane.bottom_right.y = -2;
+  vplane.bottom_right.z = 3;
+  vplane.hres = 400;
+  vplane.vres = 400;
+
+  tracer_ptr = new Basic(this);
+  Acceleration* g_ptr = new Acceleration(50, 50, 50);
+    
+    
+  bg_color = black;  // background color.
+
   // camera and sampler.
   Camera *cam = new Pinhole(Point3D(0, 0, 10), Point3D(0, 0, 0), 7);
   cam->compute_uvw();

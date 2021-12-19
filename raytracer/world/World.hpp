@@ -9,9 +9,18 @@
 
    Courtesy Kevin Suffern.
 */
+// For Obj File Loading 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include "../utilities/Vector3D.hpp"
+#include "../geometry/Triangle.hpp"
 
 #include <vector>
 
+#include "../utilities/RGBColor.hpp"
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../geometry/Geometry.hpp"
@@ -51,6 +60,8 @@ public:
   void add_light(Light* light_ptr);
   void set_camera(Camera *c_ptr);
   void set_tracer(Tracer *t_ptr);
+
+  void load_OBJ(const char* file_name);
 
   // Build scene - add all geometry, materials, lights, viewplane, camera,
   // samplers, and acceleration structures

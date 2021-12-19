@@ -6,7 +6,7 @@ Whitted::Whitted(): Tracer() {
 Whitted::Whitted(World* _worldPtr): Tracer(_worldPtr){
 }
 
-RGBColor Whitted::trace_ray(const Ray ray, const int depth) {
+RGBColor Whitted::trace_ray(const Ray &ray, const int depth) {
 	if (depth > world->vplane.max_depth)
 		return(black);
 	else {

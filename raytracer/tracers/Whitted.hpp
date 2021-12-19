@@ -3,12 +3,13 @@
 #include "Tracer.hpp"
 
 class Whitted : public Tracer{
-    Whitted();
+    public:
+        Whitted();
 		
-    Whitted(World* _worldPtr);
-    
-    ~Whitted();
+        Whitted(World* _worldPtr);
+        
+        ~Whitted();
 
-    RGBColor trace_ray(const Ray ray, const int depth) ;
+        RGBColor trace_ray(const Ray &ray, const int depth) ;
 
 };

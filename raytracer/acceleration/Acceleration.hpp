@@ -27,6 +27,7 @@ public:
     virtual bool
     shadow_hit(Ray &ray, float &tmin);
 
+    BBox getBBox() const;
 private:
     std::vector<Geometry*> cells; // cells are stored in a 1D array
     BBox bbox;                       // bounding box

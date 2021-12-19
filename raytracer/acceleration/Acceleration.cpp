@@ -355,3 +355,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
 }
 
 bool Acceleration::shadow_hit(Ray &ray, float &tmin){return false;}
+
+BBox Acceleration::getBBox() const{
+    return bbox;
+}

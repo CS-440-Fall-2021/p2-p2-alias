@@ -30,12 +30,12 @@
 
 void
 World::build(void) {
-  vplane.top_left.x = -1;
-  vplane.top_left.y = 1;
-  vplane.top_left.z = 3;
-  vplane.bottom_right.x = 1;
-  vplane.bottom_right.y = -1;
-  vplane.bottom_right.z = 3;
+  vplane.top_left.x = -5;
+  vplane.top_left.y = 5;
+  vplane.top_left.z = 5;
+  vplane.bottom_right.x = 5;
+  vplane.bottom_right.y = -5;
+  vplane.bottom_right.z = 5;
   vplane.hres = 400;
   vplane.vres = 400;
 
@@ -64,6 +64,6 @@ World::build(void) {
   add_geometry(plane_ptr);
 
 
-  std::cout << "Bounding box" << grid_ptr->getBBox().to_string() <<std::endl;
+  std::cout << "Bounding box" << g_ptr->getBBox().to_string() << std::endl;
 }
 

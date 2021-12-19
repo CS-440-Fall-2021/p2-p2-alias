@@ -147,10 +147,10 @@ void Acceleration::setup_cells(void)
 
     }
     // erase Compound::Objects, but don’t delete the objects
-objects.erase (objects.begin(), objects.end());
-// code for statistics on cell objects counts can go in here
-// erase the temporary counts vector
-counts.erase (counts.begin(), counts.end());
+    objects.erase (objects.begin(), objects.end());
+    // code for statistics on cell objects counts can go in here
+    // erase the temporary counts vector
+    counts.erase (counts.begin(), counts.end());
 }
 
 
@@ -169,7 +169,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
     float oy = ray.o.y;
     float oz = ray.o.z;
 
-    float t0, t1 = 0;
+    float t0, t1 = 0.0;
 
     if (! bbox.hit(ray, t0, t1))
         return false;
@@ -186,12 +186,61 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
     }
 
-    float tx_min = (x0 - ox) / ray.d.x;
-    float tx_max = (x1 - ox) / ray.d.x;
-    float ty_min = (y0 - oy) / ray.d.y;
-    float ty_max = (y1 - oy) / ray.d.y;
-    float tz_min = (z0 - oz) / ray.d.z;
-    float tz_max = (z1 - oz) / ray.d.z;
+    // float tx_min = (x0 - ox) / ray.d.x;
+    // float tx_max = (x1 - ox) / ray.d.x;
+    // float ty_min = (y0 - oy) / ray.d.y;
+    // float ty_max = (y1 - oy) / ray.d.y;
+    // float tz_min = (z0 - oz) / ray.d.z;
+    // float tz_max = (z1 - oz) / ray.d.z;
+
+    float tx_min, tx_max, ty_min, ty_max, tz_min, tz_max; 
+    double a = 1.0 / ray.d.x;
+
+    if (a >= 0)
+    {
+        tx_min = (x0 - ox) * a;
+        tx_max = (x1 - ox) * a;
+    }
+    else
+    {
+        tx_min = (x1 - ox) * a;
+        tx_max = (x0 - ox) * a;
+    }
+    if (ray.d.x == 0.0){
+        tx_min = kHugeValue;
+        tx_max = kEpsilon ;
+    }
+    double b = 1.0 / ray.d.y;
+    if (b >= 0)
+    {
+        ty_min = (y0 - oy) * b;
+        ty_max = (y1 - oy) * b;
+    }
+    else
+    {
+        ty_min = (y1 - oy) * b;
+        ty_max = (y0 - oy) * b;
+    }
+    if (ray.d.y == 0.0){
+        ty_min = kHugeValue;
+        ty_max = kEpsilon ;
+    }
+
+    double c = 1.0 / ray.d.z;
+    if (c >= 0)
+    {
+        tz_min = (z0 - oz) * c;
+        tz_max = (z1 - oz) * c;
+    }
+    else
+    {
+        tz_min = (z1 - oz) * c;
+        tz_max = (z0 - oz) * c;
+    }
+    if (ray.d.z == 0.0){
+        tz_min = kHugeValue;
+        tz_max = kEpsilon ;
+    }
 
     float dtx = (tx_max - tx_min) / nx;
     float dty = (ty_max - ty_min) / ny;
@@ -202,22 +251,75 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
     int ix_step, iy_step, iz_step;
     int ix_stop, iy_stop, iz_stop;
 
-    tx_next = tx_min + (ix + 1) * dtx;
-    ix_step = +1;
-    ix_stop = nx;
+    // tx_next = tx_min + (ix + 1) * dtx;
+    // ix_step = +1;
+    // ix_stop = nx;
     
-    ty_next = ty_min + (iy + 1) * dty;
-    iy_step = +1;
-    iy_stop = ny;
+    // ty_next = ty_min + (iy + 1) * dty;
+    // iy_step = +1;
+    // iy_stop = ny;
     
-    tz_next = tz_min + (iz + 1) * dtz;
-    iz_step = +1;
-    iz_stop = nz;
+    // tz_next = tz_min + (iz + 1) * dtz;
+    // iz_step = +1;
+    // iz_stop = nz;
+
+    if (ray.d.x > 0) {
+		tx_next = tx_min + (ix + 1) * dtx;
+		ix_step = +1;
+		ix_stop = nx;
+	}
+	else {
+		tx_next = tx_min + (nx - ix) * dtx;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+	
+	if (ray.d.x == 0.0) {
+		tx_next = kHugeValue;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+	
+	
+	if (ray.d.y > 0) {
+		ty_next = ty_min + (iy + 1) * dty;
+		iy_step = +1;
+		iy_stop = ny;
+	}
+	else {
+		ty_next = ty_min + (ny - iy) * dty;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+	
+	if (ray.d.y == 0.0) {
+		ty_next = kHugeValue;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+		
+	if (ray.d.z > 0) {
+		tz_next = tz_min + (iz + 1) * dtz;
+		iz_step = +1;
+		iz_stop = nz;
+	}
+	else {
+		tz_next = tz_min + (nz - iz) * dtz;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+	
+	if (ray.d.z == 0.0) {
+		tz_next = kHugeValue;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+	
 
     while (true) {
         Geometry* object_ptr = cells[ix + nx * iy + nx * ny * iz];
         if (tx_next < ty_next && tx_next < tz_next) {
-            if (object_ptr && object_ptr->hit(ray, tmin, s) && tmin < tx_next) {
+            if (object_ptr && object_ptr->hit(ray, tmin, s) && (tmin < tx_next)) {
             material_ptr = object_ptr->get_material();
             return (true);
             }
@@ -228,7 +330,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         }
         else {
             if (ty_next < tz_next) {
-                if (object_ptr && object_ptr->hit(ray, tmin, s) && tmin < ty_next) {
+                if (object_ptr && object_ptr->hit(ray, tmin, s) && (tmin < ty_next)) {
                     material_ptr = object_ptr->get_material();
                     return (true);
                 }
@@ -238,7 +340,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
                     return (false);
             }
             else {
-                if (object_ptr && object_ptr->hit(ray, tmin, s) && tmin < tz_next) {
+                if (object_ptr && object_ptr->hit(ray, tmin, s) && (tmin < tz_next)) {
                     material_ptr = object_ptr->get_material();
                     return (true);
                 }

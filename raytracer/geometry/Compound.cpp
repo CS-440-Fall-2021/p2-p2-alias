@@ -116,17 +116,18 @@ Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 	Vector3D normal;
 	Point3D	local_hit_point;
 	bool hit = false;
-	tmin = kHugeValue;
+	t = kHugeValue;
 	int num_objects	= objects.size();
 	
-	for (int j = 0; j < num_objects; j++)
-		if (objects[j]->hit(ray, t, sr) && (t < tmin)) {
+	for (int j = 0; j < num_objects; j++){
+		if (objects[j]->hit(ray, t, sr) && (t <= tmin)) {
 			hit				= true;
 			tmin 			= t;
 			material_ptr = (objects[j]->get_material());
 			normal			= sr.normal;
 			local_hit_point	= sr.hit_point;  
 		}
+	}
 	
 	if (hit) {
 		sr.t				= tmin;

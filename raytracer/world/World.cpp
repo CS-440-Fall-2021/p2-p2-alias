@@ -26,12 +26,13 @@ void World::set_camera(Camera *c_ptr){
 
 ShadeInfo World::hit_objects(const Ray &ray){
     ShadeInfo sf(*this);
-    sf.t = kHugeValue;
+    float t = kHugeValue;
     for (const auto &g: geometry){
-        if (g->hit(ray,sf.t,sf)) //if the ray hits the object
+        if (g->hit(ray, t, sf) & (sf.t > t)) //if the ray hits the object
         {
             // update the following values of shadeinfo:
             sf.hit=true;
+            sf.t=t;
             sf.material_ptr=g->get_material();
             sf.ray=ray;
         }

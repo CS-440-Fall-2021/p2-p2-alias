@@ -35,7 +35,7 @@ std::string Sphere::to_string() const
 
 bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const
 {      // the following code is taken from the book
-    double ti;
+    float ti;
     Vector3D temp = ray.o - c;
     double a = ray.d * ray.d;
     double b = 2.0 * temp * ray.d;
@@ -51,7 +51,7 @@ bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const
         double denom = 2.0 * a;
         ti = (-b - e) / denom;
 
-        if (ti > kEpsilon && ti < t)
+        if ((ti > kEpsilon) && (ti <= t))
         {
             t = ti;
             s.normal = (temp + ti * ray.d) / r;
@@ -64,7 +64,7 @@ bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const
             return true;
         }
         ti = (-b + e) / denom;
-        if (ti > kEpsilon && ti < t)
+        if ((ti > kEpsilon) && (ti <= t))
         {
             t = ti;
             s.normal = (temp + ti * ray.d) / r;

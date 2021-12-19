@@ -38,6 +38,10 @@ bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const
         tx_min = (pmax.x - ox) * a;
         tx_max = (pmin.x - ox) * a;
     }
+    if (dx == 0.0){
+        tx_min = kEpsilon;
+        tx_max = kHugeValue;
+    }
     double b = 1.0 / dy;
     if (b >= 0)
     {
@@ -49,6 +53,11 @@ bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const
         ty_min = (pmax.y - oy) * b;
         ty_max = (pmin.y - oy) * b;
     }
+    if (dy == 0.0){
+        ty_min = kEpsilon;
+        ty_max = kHugeValue;
+    }
+    
     double c = 1.0 / dz;
     if (c >= 0)
     {
@@ -59,6 +68,10 @@ bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const
     {
         tz_min = (pmax.z - oz) * c;
         tz_max = (pmin.z - oz) * c;
+    }
+    if (dz == 0.0){
+        tz_min = kEpsilon;
+        tz_max = kHugeValue;
     }
 
     // find largest entering t value

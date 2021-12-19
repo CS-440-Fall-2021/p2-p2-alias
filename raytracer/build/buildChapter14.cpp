@@ -26,6 +26,8 @@
 
 #include "../world/World.hpp"
 
+#include <iostream>
+
 void
 World::build(void) {
   // view plane  
@@ -39,12 +41,12 @@ World::build(void) {
   vplane.vres = 400;
 
   tracer_ptr = new Basic(this);
-  Acceleration* grid_ptr = new Acceleration;
+  Acceleration* grid_ptr = new Acceleration(50,50,50);
   
   bg_color = black;  // background color.
   
   // camera and sampler.
-  Camera *cam = new Pinhole(Point3D(0, 0, 200), Point3D(0, 0, 0), 100);
+  Camera *cam = new Pinhole(Point3D(0, 0, 400), Point3D(0, 0, -300), 300);
   cam->compute_uvw();
   set_camera(cam);
   sampler_ptr = new Simple(camera_ptr, &vplane);
@@ -240,8 +242,8 @@ World::build(void) {
   // vertical plane
   Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Vector3D(0, 0, 1));
   plane_ptr->set_material(new Cosine(grey));
-  // add_geometry(plane_ptr);
-  grid_ptr->add_object(plane_ptr);
+  add_geometry(plane_ptr);
+  // grid_ptr->add_object(plane_ptr);
 
   grid_ptr->setup_cells();
   add_geometry(grid_ptr);

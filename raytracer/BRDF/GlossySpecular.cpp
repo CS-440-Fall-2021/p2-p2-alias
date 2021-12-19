@@ -52,6 +52,10 @@ void GlossySpecular::set_cs(const RGBColor& _cs){
     cs = _cs;
 }
 
+void GlossySpecular::set_exp(const float _exp){
+    exp = _exp;
+}
+
 float GlossySpecular::get_ks() const{
     return ks;
 }

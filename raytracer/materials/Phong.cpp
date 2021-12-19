@@ -30,3 +30,28 @@ RGBColor Phong::shade(ShadeInfo& sr) {
 
     return (L);
 }
+
+void Phong::set_ks(const float ks){
+    specular_brdf->set_ks(ks);
+}
+
+void Phong::set_cs(const float cs){
+    specular_brdf->set_cs(cs);
+}
+
+void Phong::set_ka(const float ka){
+    ambient_brdf->set_kd(ka);
+}
+
+void Phong::set_kd(const float kd){
+    diffuse_brdf->set_kd(kd);
+}
+
+void Phong::set_cd(const RGBColor& c){
+    ambient_brdf->set_cd(c);
+    diffuse_brdf->set_cd(c);
+}
+
+void Phong::set_exp(const float exp){
+    specular_brdf->set_exp(exp);
+}

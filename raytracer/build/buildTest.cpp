@@ -12,14 +12,14 @@
 
 void World::build(void)
 {   
-    vplane.top_left.x = -1;
-    vplane.top_left.y = 1;
+    vplane.top_left.x = -10;
+    vplane.top_left.y = 10;
     vplane.top_left.z = 3;
-    vplane.bottom_right.x = 1;
-    vplane.bottom_right.y = -1;
+    vplane.bottom_right.x = 10;
+    vplane.bottom_right.y = -10;
     vplane.bottom_right.z = 3;
-    vplane.hres = 400;
-    vplane.vres = 400;
+    vplane.hres = 10000;
+    vplane.vres = 10000;
 
     tracer_ptr = new Basic(this);
     Acceleration* grid_ptr = new Acceleration(50, 50, 50);
@@ -34,7 +34,7 @@ void World::build(void)
     sampler_ptr = new Simple(camera_ptr, &vplane);
     // construct viewplane, integrator, camera, and lights
     int num_spheres = 1000000;
-    float volume = 1.5 / num_spheres;
+    float volume = 2 / num_spheres;
     float radius = pow(0.75 * volume / 3.14159, 0.333333);
     srand(15);
     for (int j = 0; j < num_spheres; j++)
@@ -49,9 +49,9 @@ void World::build(void)
         // matte_ptr->set_cd(static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
         //                   static_cast <float> (rand()) / static_cast <float> (RAND_MAX), 
         //                   static_cast <float> (rand()) / static_cast <float> (RAND_MAX););
-        Sphere *sphere_ptr = new Sphere(Point3D(1.0 - 2.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
-                                                1.0 - 2.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
-                                                1.0 - 2.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), radius);
+        Sphere *sphere_ptr = new Sphere(Point3D(10.0 - 20.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
+                                                10.0 - 20.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
+                                                10.0 - 20.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), radius);
         
         sphere_ptr->set_material(matte_ptr);
         grid_ptr->add_object(sphere_ptr);

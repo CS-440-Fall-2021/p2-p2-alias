@@ -13,3 +13,11 @@ Vector3D PointLight::get_direction(ShadeInfo &si){
 RGBColor PointLight::L(ShadeInfo &si) {
     return (ls * color);
 }
+
+void PointLight::set_location(const float x, const float y, const float z){
+    location = Vector3D(x,y,z);
+}
+
+void PointLight::scale_radiance(const float f){
+    ls = f;
+}

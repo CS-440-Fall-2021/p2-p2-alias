@@ -20,4 +20,9 @@ class Light{
 
         virtual Vector3D get_direction(ShadeInfo& si) = 0;
         virtual RGBColor L(ShadeInfo& si) = 0;
+
+        // Access Methods
+        virtual void set_shadows(const bool _shadows);
+        virtual bool get_shadows() const;
+
 };

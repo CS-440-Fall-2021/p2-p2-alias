@@ -12,11 +12,11 @@
 
 void World::build(void)
 {   
-    vplane.top_left.x = -2;
-    vplane.top_left.y = 2;
+    vplane.top_left.x = -1;
+    vplane.top_left.y = 1;
     vplane.top_left.z = 3;
-    vplane.bottom_right.x = 2;
-    vplane.bottom_right.y = -2;
+    vplane.bottom_right.x = 1;
+    vplane.bottom_right.y = -1;
     vplane.bottom_right.z = 3;
     vplane.hres = 400;
     vplane.vres = 400;

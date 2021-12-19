@@ -8,6 +8,10 @@ RGBColor Lambertian::rho(const ShadeInfo& sr, const Vector3D& wo) const{
     return (kd * cd);
 }
 
+RGBColor Lambertian::sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo, float& pdf){
+    return RGBColor();
+}
+
 void Lambertian::set_kd(const float _kd){
     kd = _kd;
 }

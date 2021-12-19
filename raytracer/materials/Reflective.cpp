@@ -6,6 +6,11 @@ Reflective::Reflective(): reflective_brdf(nullptr){
 Reflective::Reflective(PerfectSpecular* ps): reflective_brdf(ps){    
 }
 
+Reflective::Reflective(Lambertian* amb, Lambertian* dif, GlossySpecular* spec, PerfectSpecular *ps)
+    : Phong(amb, dif, spec), reflective_brdf(ps){
+}
+
+
 RGBColor Reflective::shade(ShadeInfo& sr) {
     RGBColor L(Phong::shade(sr)); // direct illumination
     

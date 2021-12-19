@@ -131,9 +131,6 @@ void World::load_OBJ(const char* file_name){
 		// triangles.push_back(triangle_ptr);
         add_geometry(triangle_ptr);
 	}
-	//DEBUG
-	std::cout << "Num of triangles: " << triangles.size() << "\n";
-
 	//Loaded success
 	std::cout << "OBJ file loaded!" << "\n";
 }

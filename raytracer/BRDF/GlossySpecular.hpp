@@ -2,7 +2,7 @@
 
 #include "BRDF.hpp"
 
-class GlossySpecular{
+class GlossySpecular : public BRDF{
     
     private:
         float ks;

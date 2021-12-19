@@ -56,12 +56,14 @@ World::build(void) {
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\Intergalactic_Spaceship-(Wavefront).obj");
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\cube.obj");
   load_OBJ("..\\assets\\PokeBall.obj");
+  add_geometry(g_ptr);
 
   // vertical plane
   Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Vector3D(0, 0, 1));
   plane_ptr->set_material(new Cosine(green));
   add_geometry(plane_ptr);
 
-  add_geometry(g_ptr);
+
+  std::cout << "Bounding box" << grid_ptr->getBBox().to_string() <<std::endl;
 }
 

@@ -18,9 +18,9 @@ class Lambertian{
         // Destructor.
         ~Lambertian() = default;
 
-        virtual RGBColor f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const;
-        // virtual RGBColor sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo);
-        virtual RGBColor rho(const ShadeInfo& sr, const Vector3D& wo) const;
+        RGBColor f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const;
+        RGBColor sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo, float& pdf);
+        RGBColor rho(const ShadeInfo& sr, const Vector3D& wo) const;
 
         // Access Methods.
         void set_kd(const float _kd);

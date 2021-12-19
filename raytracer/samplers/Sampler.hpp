@@ -59,6 +59,7 @@ public:
   void set_num_sets(int ns);
   void setup_shuffled_indices(int ns);
   virtual void generate_samples() = 0;
+  int get_num_samples();
 
   virtual Point3D sample_hemisphere();
   void map_samples_to_hemisphere(const float p);

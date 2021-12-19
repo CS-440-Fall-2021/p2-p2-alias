@@ -55,7 +55,7 @@ World::build(void) {
 
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\Intergalactic_Spaceship-(Wavefront).obj");
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\cube.obj");
-  load_OBJ("../assets/PokeBall.obj");
+  load_OBJ("../assets/cube.obj");
   add_geometry(g_ptr);
 
   // vertical plane

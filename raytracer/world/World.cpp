@@ -131,9 +131,9 @@ void World::load_OBJ(const char* file_name){
  		triangle_ptr = new Triangle(v0, v1, v2);
 		triangle_ptr->set_material(new Cosine(blue));
         // add_geometry(triangle_ptr);
-		grid_ptr->add_object(triangle_ptr);	
+		grid_ptr->add_object(triangle_ptr);
 	}
-	grid_ptr->setup_cells(); // must be called after all adding all triangles
+	// grid_ptr->setup_cells(); // must be called after all adding all triangles
 	//Loaded success
 	std::cout << "OBJ file loaded!" << "\n";
 }

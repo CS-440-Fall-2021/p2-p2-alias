@@ -31,6 +31,10 @@ void Sampler::set_num_samples(int nsm) {
     num_samples = nsm;
 }
 
+int Sampler::get_num_samples() {
+    return num_samples;
+}
+
 void Sampler::setup_shuffled_indices(int ns){
     shuffled_indices.reserve(num_samples * num_sets);
     std::vector<int> indices;

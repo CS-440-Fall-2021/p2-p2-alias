@@ -9,21 +9,28 @@
 
 #include "../acceleration/Acceleration.hpp"
 
-#include "../cameras/Parallel.hpp"
-#include "../cameras/Pinhole.hpp"
-
 #include "../lights/AmbientLight.hpp"
+#include "../lights/Directional.hpp"
 #include "../lights/PointLight.hpp"
 
 #include "../geometry/Plane.hpp"
 #include "../geometry/Sphere.hpp"
 
 #include "../materials/Cosine.hpp"
+#include "../materials/Reflective.hpp"
 #include "../materials/Matte.hpp"
 
 #include "../tracers/Basic.hpp"
+#include "../tracers/Whitted.hpp"
+
+#include "../BRDF/PerfectSpecular.hpp"
+#include "../BRDF/GlossySpecular.hpp"
+#include "../BRDF/Lambertian.hpp"
 
 #include "../samplers/Simple.hpp"
+#include "../samplers/MultiJittered.hpp"
+
+#include "../cameras/Pinhole.hpp"
 
 #include "../utilities/Constants.hpp"
 #include "../utilities/Vector3D.hpp"
@@ -43,6 +50,7 @@ World::build(void) {
   vplane.bottom_right.z = 100;
   vplane.hres = 400;
   vplane.vres = 400;
+  vplane.max_depth = 4;
 
   tracer_ptr = new Basic(this);
   Acceleration* grid_ptr = new Acceleration(50,50,50);
@@ -53,8 +61,9 @@ World::build(void) {
   Camera *cam = new Pinhole(Point3D(0, 0, 400), Point3D(0, 0, -300), 300);
   cam->compute_uvw();
   set_camera(cam);
-  sampler_ptr = new Simple(camera_ptr, &vplane);
-	
+  sampler_ptr = new MultiJittered(10);
+  sampler_ptr->map_samples_to_hemisphere(10);
+
   // colors
   RGBColor yellow(1, 1, 0);  // yellow
   RGBColor brown(0.71, 0.40, 0.16);  // brown
@@ -69,13 +78,19 @@ World::build(void) {
   RGBColor white(1);  // grey
 
   ambient_ptr = new AmbientLight(0.1, white);
+  Light *directional_ptr = new Directional(0.7, grey, Vector3D(1, -1, -1));
   Light *point_light1 = new PointLight(1, white, Vector3D(-40, 100, 50));
+	add_light(directional_ptr);
 	add_light(point_light1);
+
+  PerfectSpecular *ps = new PerfectSpecular(0.2, darkYellow);
+  GlossySpecular *gs = new GlossySpecular(0.1, white, 10);
+  Lambertian *diff_ptr_1 = new Lambertian(0.8, yellow);
 
   Lambertian *ambient_brdf = new Lambertian(0.9, white);
   // spheres
   Sphere* sphere_ptr1 = new Sphere(Point3D(5, 3, 0), 30); 
-  sphere_ptr1->set_material(new Matte(ambient_brdf,  new Lambertian(1, yellow)));  // yellow
+  sphere_ptr1->set_material(new Reflective(ambient_brdf, diff_ptr_1, gs, ps));  // yellow
   // add_geometry(sphere_ptr1);
   grid_ptr->add_object(sphere_ptr1);
 	

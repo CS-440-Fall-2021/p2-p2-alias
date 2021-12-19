@@ -12,6 +12,7 @@ class Reflective: public Phong {
     // constructors, access functions, etc.
     Reflective();
     Reflective(PerfectSpecular*);
+    Reflective(Lambertian* amb, Lambertian* dif, GlossySpecular* spec, PerfectSpecular*);
 
     ~Reflective() = default;
 

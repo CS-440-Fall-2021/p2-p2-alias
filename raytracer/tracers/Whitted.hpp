@@ -8,8 +8,8 @@ class Whitted : public Tracer{
 		
         Whitted(World* _worldPtr);
         
-        ~Whitted();
+        ~Whitted() = default;
 
-        RGBColor trace_ray(const Ray &ray, const int depth) ;
+        RGBColor trace_ray(const Ray &ray, const int depth);
 
 };

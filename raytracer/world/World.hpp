@@ -43,6 +43,7 @@ public:
   std::vector<Geometry *> geometry;
   Camera *camera_ptr;
   Sampler *sampler_ptr;
+  Acceleration *grid_ptr;
   Tracer *tracer_ptr;
   Acceleration* accel;
   Light* ambient_ptr;
@@ -60,6 +61,7 @@ public:
   void add_light(Light* light_ptr);
   void set_camera(Camera *c_ptr);
   void set_tracer(Tracer *t_ptr);
+  void set_acceleration(Acceleration *g_ptr);
 
   void load_OBJ(const char* file_name);
 

@@ -32,6 +32,16 @@ void
 World::build(void) {
   std::vector<Point3D> vertices;
   std::vector<Vector3D> normals;
-  Acceleration *grid_ptr = new Acceleration(50, 50, 50);
+  Acceleration *g_ptr = new Acceleration(50, 50, 50);
+  // camera and sampler.
+  Camera *cam = new Pinhole(Point3D(0, 0, 10), Point3D(0, 0, 0), 7);
+  cam->compute_uvw();
+  set_camera(cam);
+  sampler_ptr = new Simple(camera_ptr, &vplane);
+  set_acceleration(g_ptr);
+
+  
+  // load_OBJ("C:\\Users\\abbas\\3D Objects\\Intergalactic_Spaceship-(Wavefront).obj");
+  load_OBJ("C:\\Users\\abbas\\3D Objects\\cube.obj");
 }
 

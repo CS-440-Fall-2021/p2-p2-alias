@@ -3,8 +3,8 @@
 World::World(){
     camera_ptr = NULL;
     sampler_ptr = NULL;
+	grid_ptr = NULL;
     std::vector<Geometry *> geometry;
-
 }
 
 World::~World(){   
@@ -23,6 +23,9 @@ void World::set_camera(Camera *c_ptr){
     camera_ptr = c_ptr;
 }
 
+void World::set_acceleration(Acceleration *g_ptr){
+	grid_ptr = g_ptr;
+}
 
 ShadeInfo World::hit_objects(const Ray &ray){
     ShadeInfo sf(*this);
@@ -80,7 +83,7 @@ void World::load_OBJ(const char* file_name){
 		{
 			ss >> temp_point.x >> temp_point.y >> temp_point.z;
 			//DEBUG
-			std::cout << temp_point.to_string() << '\n';
+			// std::cout << temp_point.to_string() << '\n';
 			
 			vertex_positions.push_back(temp_point);
 		}
@@ -114,11 +117,9 @@ void World::load_OBJ(const char* file_name){
 	}
 
 	//DEBUG
-	std::cout << "Num of vertices" << vertex_positions.size()<< '\n';
-	std::cout << "Num of vertex positions" << vertex_position_indicies.size() << '\n';
+	std::cout << "Num of vertices " << vertex_positions.size()<< '\n';
+	std::cout << "Num of vertex positions " << vertex_position_indicies.size() << '\n';
 
-	//Triangle array
-	// std::vector<Triangle*> triangles;
 	Triangle* triangle_ptr;
 	Point3D v0,v1,v2;
 	//Load in all indices
@@ -128,8 +129,8 @@ void World::load_OBJ(const char* file_name){
 		v1 = vertex_positions[vertex_position_indicies[i+1]-1];
 		v2 = vertex_positions[vertex_position_indicies[i+2]-1];
  		triangle_ptr = new Triangle(v0, v1, v2);
-		// triangles.push_back(triangle_ptr);
-        add_geometry(triangle_ptr);
+        // add_geometry(triangle_ptr);
+		grid_ptr->add_object(triangle_ptr);
 	}
 	//Loaded success
 	std::cout << "OBJ file loaded!" << "\n";

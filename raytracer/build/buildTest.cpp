@@ -12,11 +12,11 @@
 
 void World::build(void)
 {   
-    vplane.top_left.x = -2;
-    vplane.top_left.y = 2;
+    vplane.top_left.x = -1;
+    vplane.top_left.y = 1;
     vplane.top_left.z = 3;
-    vplane.bottom_right.x = 2;
-    vplane.bottom_right.y = -2;
+    vplane.bottom_right.x = 1;
+    vplane.bottom_right.y = -1;
     vplane.bottom_right.z = 3;
     vplane.hres = 400;
     vplane.vres = 400;
@@ -34,7 +34,7 @@ void World::build(void)
     sampler_ptr = new Simple(camera_ptr, &vplane);
     // construct viewplane, integrator, camera, and lights
     int num_spheres = 1000000;
-    float volume = 2.0 / num_spheres;
+    float volume = 1.5 / num_spheres;
     float radius = pow(0.75 * volume / 3.14159, 0.333333);
     srand(15);
     for (int j = 0; j < num_spheres; j++)

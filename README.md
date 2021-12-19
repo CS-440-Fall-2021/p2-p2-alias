@@ -117,7 +117,8 @@ There is a lot to handle and there are bound to be confusions and queries. Pleas
 
     g++ main.cpp build/buildTest.cpp acceleration/*.cpp cameras/*.cpp geometry/*.cpp materials/*.cpp samplers/*.cpp tracers/*.cpp utilities/*.cpp world/*.cpp BRDF/*.cpp lights/*.cpp -O -Wall -o main.exe -g
 
-    g++ main.cpp build/buildNew.cpp acceleration/*.cpp cameras/*.cpp geometry/*.cpp materials/*.cpp samplers/*.cpp tracers/*.cpp utilities/*.cpp world/*.cpp BRDF/*.cpp lights/*.cpp -O -Wall -o main.exe -g
     
 3. Run with:
     .\main.exe
+
+4. Open Scene.ppm

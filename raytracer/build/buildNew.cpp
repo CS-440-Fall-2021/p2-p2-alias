@@ -53,6 +53,6 @@ World::build(void) {
   set_acceleration(g_ptr);
 
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\Intergalactic_Spaceship-(Wavefront).obj");
-  load_OBJ("C:\\Users\\abbas\\3D Objects\\cube.obj");
+  load_OBJ("../assets/PokeBall.obj");
 }
 

@@ -69,10 +69,10 @@ World::build(void) {
   RGBColor white(1);  // grey
 
   ambient_ptr = new AmbientLight(0.1, white);
-  Light *point_light1 = new PointLight(1, white, Vector3D(-100, 400, 50));
+  Light *point_light1 = new PointLight(1, white, Vector3D(-40, 100, 50));
 	add_light(point_light1);
 
-  Lambertian *ambient_brdf = new Lambertian(0.7, white);
+  Lambertian *ambient_brdf = new Lambertian(0.9, white);
   // spheres
   Sphere* sphere_ptr1 = new Sphere(Point3D(5, 3, 0), 30); 
   sphere_ptr1->set_material(new Matte(ambient_brdf,  new Lambertian(1, yellow)));  // yellow

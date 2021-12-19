@@ -19,6 +19,7 @@ public:
   Vector3D normal;      // normal to the plane.
   int hres;             // horizontal resolution
   int vres;             // vertical resolution
+  int max_depth;
 
 public:
   // Constructors.

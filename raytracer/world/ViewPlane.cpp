@@ -6,6 +6,7 @@ ViewPlane::ViewPlane(){
     normal = Vector3D(0, 0, 1);
     hres = 0;
     vres = 0;
+    max_depth = 1;
 }
 
 int ViewPlane::get_hres() const{

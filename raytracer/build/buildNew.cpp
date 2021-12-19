@@ -46,13 +46,12 @@ World::build(void) {
   bg_color = black;  // background color.
 
   // camera and sampler.
-  Camera *cam = new Pinhole(Point3D(0, 0, 10), Point3D(0, 0, 0), 7);
+  Camera *cam = new Pinhole(Point3D(0, 0, 10), Point3D(0, 0, -10), 7);
   cam->compute_uvw();
   set_camera(cam);
   sampler_ptr = new Simple(camera_ptr, &vplane);
   set_acceleration(g_ptr);
 
-  
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\Intergalactic_Spaceship-(Wavefront).obj");
   load_OBJ("C:\\Users\\abbas\\3D Objects\\cube.obj");
 }

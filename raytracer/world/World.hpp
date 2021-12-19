@@ -28,6 +28,8 @@
 #include "../acceleration/Acceleration.hpp"
 #include "../lights/Light.hpp"
 #include "ViewPlane.hpp"
+#include "../utilities/Constants.hpp"
+#include "../materials/Cosine.hpp"
 
 class Camera;
 class Geometry;
@@ -35,6 +37,7 @@ class Ray;
 class Sampler;
 class ShadeInfo;
 class Tracer;
+class Material;
 
 class World {
 public:

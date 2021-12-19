@@ -49,7 +49,7 @@ void World::set_tracer(Tracer *t_ptr){
     tracer_ptr = t_ptr;
 }
 
-void World::load_OBJ(const char* file_name, Material * material_ptr){
+void World::load_OBJ(const char* file_name){
     //Vertex portions
 	std::vector<Point3D> vertex_positions;
 
@@ -129,7 +129,7 @@ void World::load_OBJ(const char* file_name, Material * material_ptr){
 		v1 = vertex_positions.at(*(it+1)-1);
 		v2 = vertex_positions.at(*(it+2)-1);
  		triangle_ptr = new Triangle(v0, v1, v2);
-		triangle_ptr->set_material(matte_ptr);
+		triangle_ptr->set_material(new Cosine(blue));
         // add_geometry(triangle_ptr);
 		grid_ptr->add_object(triangle_ptr);	
 	}

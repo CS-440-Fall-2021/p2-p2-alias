@@ -16,6 +16,7 @@
 #include "../geometry/Sphere.hpp"
 
 #include "../materials/Cosine.hpp"
+#include "../materials/Matte.hpp"
 
 #include "../tracers/Basic.hpp"
 

@@ -10,6 +10,14 @@ class Lambertian{
         RGBColor cd;
     
     public:
+
+        // Constructors.
+        Lambertian() = default;
+        Lambertian(float kd_, RGBColor cd_);
+
+        // Destructor.
+        ~Lambertian() = default;
+
         virtual RGBColor f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const;
         // virtual RGBColor sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo);
         virtual RGBColor rho(const ShadeInfo& sr, const Vector3D& wo) const;

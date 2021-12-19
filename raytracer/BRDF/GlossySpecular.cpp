@@ -1,6 +1,12 @@
 #include "GlossySpecular.hpp"
 #include <math.h>
 
+GlossySpecular::GlossySpecular(float ks_, RGBColor cs_, float exp_){
+    ks = ks_;
+    cs = cs_;
+    exp = exp_;
+}
+
 RGBColor GlossySpecular::f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const {
     RGBColor L; 
     float ndotwi = sr.normal * wi;

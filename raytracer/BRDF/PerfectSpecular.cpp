@@ -1,5 +1,11 @@
 #include "PerfectSpecular.hpp"
 
+// Constructor
+PerfectSpecular::PerfectSpecular(float kr_, RGBColor cr_){
+    kr = kr_;
+    cr = cr_;
+}
+
 RGBColor PerfectSpecular::sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo) const {
     float ndotwo = sr.normal * wo;
     wi = -wo + 2.0 * sr.normal * ndotwo;

@@ -10,6 +10,13 @@ class GlossySpecular{
         float exp;
     
     public:
+        // Constructors.
+        GlossySpecular() = default;
+        GlossySpecular(float ks_, RGBColor cs_, float exp_);
+
+        // Destructor.
+        ~GlossySpecular() = default;
+
         virtual RGBColor f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const;
         virtual RGBColor sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo, float& pdf) const;
         virtual RGBColor rho(const ShadeInfo& sr, const Vector3D& wo) const;

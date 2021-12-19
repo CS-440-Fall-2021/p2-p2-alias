@@ -28,7 +28,7 @@ public:
   Camera(const Camera &camera) = default;
   Camera &operator=(const Camera &other) = default;
 
-  // Desctructor.
+  // Destructor.
   virtual ~Camera() = default;
 
   // Get direction of projection for a point.

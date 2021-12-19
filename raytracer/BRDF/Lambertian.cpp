@@ -23,3 +23,8 @@ float Lambertian::get_kd() const{
 RGBColor Lambertian::get_cd() const{
     return cd;
 }
+
+Lambertian::Lambertian(float kd_, RGBColor cd_){
+    kd = kd_;
+    cd = cd_;
+}

@@ -124,14 +124,14 @@ void World::load_OBJ(const char* file_name){
 	Point3D v0,v1,v2;
 	//Load in all indices
 	for (auto it = vertex_position_indicies.begin(); it != (vertex_position_indicies.end()-3); it+=3) {
-		std::cout<<"it: "<< *it << std::endl;
+		// std::cout<<"it: "<< *it << std::endl;
 		v0 = vertex_positions.at(*it-1);
 		v1 = vertex_positions.at(*(it+1)-1);
 		v2 = vertex_positions.at(*(it+2)-1);
  		triangle_ptr = new Triangle(v0, v1, v2);
 		triangle_ptr->set_material(new Cosine(blue));
-        add_geometry(triangle_ptr);
-		// grid_ptr->add_object(triangle_ptr);
+        // add_geometry(triangle_ptr);
+		grid_ptr->add_object(triangle_ptr);
 	}
 	// grid_ptr->setup_cells(); // must be called after all adding all triangles
 	//Loaded success

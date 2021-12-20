@@ -30,14 +30,14 @@
 
 void
 World::build(void) {
-  vplane.top_left.x = 1;
-  vplane.top_left.y = 5;
-  vplane.top_left.z = 5;
-  vplane.bottom_right.x = 6;
-  vplane.bottom_right.y = -5;
-  vplane.bottom_right.z = 1;
-  vplane.hres = 400;
-  vplane.vres = 400;
+  vplane.top_left.x = -220;
+  vplane.top_left.y = 220;
+  vplane.top_left.z = 500;
+  vplane.bottom_right.x = 220;
+  vplane.bottom_right.y = -220;
+  vplane.bottom_right.z = 500;
+  vplane.hres = 1000;
+  vplane.vres = 1000;
 
   tracer_ptr = new Basic(this);
   Acceleration* g_ptr = new Acceleration(50, 50, 50);
@@ -46,19 +46,19 @@ World::build(void) {
   bg_color = black;  // background color.
 
   // camera and sampler.
-  Camera *cam = new Pinhole(Point3D(10, 0, 10), Point3D(-10, 0, -10), 5);
+  Camera *cam = new Pinhole(Point3D(0, 0, 600), Point3D(0, 0, -200), 100);
   cam->compute_uvw();
-  set_camera(cam);
+set_camera(cam);
   sampler_ptr = new Simple(camera_ptr, &vplane);
   set_acceleration(g_ptr);
 
 
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\Intergalactic_Spaceship-(Wavefront).obj");
   // load_OBJ("C:\\Users\\abbas\\3D Objects\\cube.obj");
-  load_OBJ("../assets/cube.obj");
+  load_OBJ("../assets/PokeScene.obj");
   // add_obj("../assets/PokeBall.obj", new Cosine(blue));
-  // g_ptr->setup_cells();
-  // add_geometry(g_ptr);
+  g_ptr->setup_cells();
+  add_geometry(g_ptr);
 
   // vertical plane
   // Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Vector3D(0, 0, 1));

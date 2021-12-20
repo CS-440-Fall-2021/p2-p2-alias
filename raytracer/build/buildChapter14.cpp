@@ -50,9 +50,9 @@ World::build(void) {
   vplane.bottom_right.z = 20;
   vplane.hres = 400;
   vplane.vres = 400;
-  vplane.max_depth = 4;
+  vplane.max_depth = 10;
 
-  tracer_ptr = new Basic(this);
+  tracer_ptr = new Whitted(this);
   Acceleration* grid_ptr = new Acceleration(50,50,50);
   
   bg_color = 0.3*white;  // background color.
@@ -83,13 +83,13 @@ World::build(void) {
 
   ambient_ptr = new AmbientLight(0.5, white);
   Light *directional_ptr = new Directional(1, white, Vector3D(0.2, -1, -1));
-  // Light *point_light1 = new PointLight(1, white, Vector3D(-400, 100, 1000));
+  Light *point_light1 = new PointLight(1, white, Vector3D(-400, 100, 1000));
 	add_light(directional_ptr);
-	// add_light(point_light1);
+	add_light(point_light1);
 
   PerfectSpecular *ps = new PerfectSpecular(0.75, darkYellow);
-  PerfectSpecular *ps1 = new PerfectSpecular(0.75, darkYellow);
-  PerfectSpecular *ps2 = new PerfectSpecular(0.75, darkYellow);
+  PerfectSpecular *ps1 = new PerfectSpecular(0.75, lightPurple);
+  PerfectSpecular *ps2 = new PerfectSpecular(0.75, darkGreen);
   GlossySpecular *gs = new GlossySpecular(0.01, white, 1000);
   Lambertian *diff_ptr_1 = new Lambertian(0.8, red);
   Lambertian *diff_ptr_2 = new Lambertian(0.8, blue);
@@ -99,10 +99,11 @@ World::build(void) {
 
   
   
-  // sphere
+  // // sphere
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5); 
   sphere_ptr->set_material(new Reflective(ambient_brdf, diff_ptr_1, gs, ps));
-  add_geometry(sphere_ptr);
+  // add_geometry(sphere_ptr);
+  grid_ptr->add_object(sphere_ptr);
   
   // triangle
   Point3D a(2.5, -5, 1); 
@@ -110,12 +111,14 @@ World::build(void) {
   Point3D c(8.5, 5, 0.5); 
   Triangle* triangle_ptr = new Triangle(a, b, c);
   triangle_ptr->set_material(new Reflective(ambient_brdf, diff_ptr_2, gs, ps1));
-  add_geometry(triangle_ptr);
+  // add_geometry(triangle_ptr);
+  grid_ptr->add_object(triangle_ptr);
 
   // plane
   Plane* plane_ptr = new Plane(Point3D(0,1,0), Vector3D(0, 10, 1)); 
   plane_ptr->set_material(new Reflective(ambient_brdf, diff_ptr_3, gs, ps2));  // green
   add_geometry(plane_ptr);
+  // grid_ptr->add_object(plane_ptr);
 
 
   // spheres

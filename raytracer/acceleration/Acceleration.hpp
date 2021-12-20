@@ -18,9 +18,6 @@ public:
     Acceleration &operator=(Acceleration &) = default;
 
     ~Acceleration() = default;
-    // other constructors, etc.
-    // BBox
-    // getBBox(void);
     void
     setup_cells(void);
     virtual bool hit(const Ray &ray, float &tmin, ShadeInfo &s) const;

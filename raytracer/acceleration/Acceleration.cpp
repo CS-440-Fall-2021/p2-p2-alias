@@ -1,6 +1,8 @@
+// The following code uses the course book Raytracer from the Ground Up as a reference.
 #include "Acceleration.hpp"
 #include <math.h>
 
+// Constructors
 Acceleration::Acceleration(){
     Compound();
 }
@@ -9,6 +11,9 @@ Acceleration::Acceleration(int nx_, int ny_, int nz_): nx(nx_), ny(ny_), nz(nz_)
     Compound();
 }
 
+// the function min-coordinates and max coordinates are used to calculate the size of the grid's bounding box by 
+// comparing the points of each object's bounding box in the scene and using kepsilon constant to adjust the size of the 
+// bounding box.
 Point3D Acceleration::min_coordinates(void)
 {
     BBox bbox;
@@ -50,13 +55,14 @@ Point3D Acceleration::max_coordinates(void)
     p0.z += kEpsilon;
     return (p0);
 }
-
+// the clamp function is used to find if the value is minimum or maximum
 inline float
 clamp(float x, float min, float max)
 {
     return (x < min ? min : (x > max ? max : x));
 }
 
+// Here we divide the grid into cells and store it in a 1D array
 void Acceleration::setup_cells(void)
 {
     // find the minimum and maximum coordinates of the grid
@@ -153,7 +159,7 @@ void Acceleration::setup_cells(void)
     counts.erase (counts.begin(), counts.end());
 }
 
-
+// The function returns a bool value if the ray hits an object.
 
 bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
 
@@ -171,6 +177,8 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
 
     float t0, t1 = 0.0;
 
+    // first we choose the cells to traverse to
+
     if (! bbox.hit(ray, t0, t1))
         return false;
 
@@ -185,13 +193,6 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
         iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
     }
-
-    // float tx_min = (x0 - ox) / ray.d.x;
-    // float tx_max = (x1 - ox) / ray.d.x;
-    // float ty_min = (y0 - oy) / ray.d.y;
-    // float ty_max = (y1 - oy) / ray.d.y;
-    // float tz_min = (z0 - oz) / ray.d.z;
-    // float tz_max = (z1 - oz) / ray.d.z;
 
     float tx_min, tx_max, ty_min, ty_max, tz_min, tz_max; 
     float a = 1.0 / ray.d.x;
@@ -250,18 +251,6 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
     
     int ix_step, iy_step, iz_step;
     int ix_stop, iy_stop, iz_stop;
-
-    // tx_next = tx_min + (ix + 1) * dtx;
-    // ix_step = +1;
-    // ix_stop = nx;
-    
-    // ty_next = ty_min + (iy + 1) * dty;
-    // iy_step = +1;
-    // iy_stop = ny;
-    
-    // tz_next = tz_min + (iz + 1) * dtz;
-    // iz_step = +1;
-    // iz_stop = nz;
 
     if (ray.d.x > 0) {
 		tx_next = tx_min + (ix + 1) * dtx;

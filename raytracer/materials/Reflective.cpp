@@ -1,11 +1,9 @@
 #include "Reflective.hpp"
 
 Reflective::Reflective(): reflective_brdf(nullptr){
-
 }
 
 Reflective::Reflective(PerfectSpecular* ps): reflective_brdf(ps){    
-
 }
 
 Reflective::Reflective(Lambertian* amb, Lambertian* dif, GlossySpecular* spec, PerfectSpecular *ps)
@@ -25,3 +23,14 @@ RGBColor Reflective::shade(ShadeInfo& sr) {
     
     return (L);
 }
+
+void Reflective::set_kr(const float kr){
+    reflective_brdf->set_kr(kr);
+}
+
+void Reflective::set_cr(const float cr){
+    reflective_brdf->set_cr(cr);
+}
+
+
+

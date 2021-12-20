@@ -1,27 +1,33 @@
+// Reference: Ray tracing from the ground up by Kevin Suffern
+
 // 	Copyright (C) Kevin Suffern 2000-2007.
 //	This C++ code is for non-commercial purposes only.
 //	This C++ code is licensed under the GNU General Public License Version 2.
-//	See the file COPYING.txt for the full license.
 
 // This builds the scene for Figure 24.17
+#include "../tracers/Whitted.hpp"
+#include "../tracers/Whitted.hpp"
+#include "../cameras/Pinhole.hpp"
+#include "../lights/PointLight.hpp"
+#include "../materials/Matte.hpp"
+#include "../materials/Reflective.hpp"
+#include "../geometry/Plane.hpp"
+#include "../geometry/Sphere.hpp"
 
 void 												
 World::build(void) {
 	int num_samples = 16;
 	
-	vp.set_hres(600);	  		
-	vp.set_vres(600);        
-	vp.set_samples(num_samples);
-	vp.set_max_depth(0);	//  for Figure 24.17(a)
+	vplane.set_hres(600);	  		
+	vplane.set_vres(600);        
+	// vplane.set_samples(num_samples);
+	vplane.max_depth = 0;	//  for Figure 24.17(a)
 //	vp.set_max_depth(1);	//  for Figure 24.17(b)
 //	vp.set_max_depth(2);	//  for Figure 24.17(c)
 	
 	tracer_ptr = new Whitted(this);
 			
-	Pinhole* pinhole_ptr = new Pinhole;
-	pinhole_ptr->set_eye(7.5, 3, 9.5);
-	pinhole_ptr->set_lookat(0);
-	pinhole_ptr->set_view_distance(300.0);
+	Pinhole* pinhole_ptr = new Pinhole(Point3D(7.5, 3, 9.5), Point3D(0, 0, 0), 300.0);
 	pinhole_ptr->compute_uvw(); 
 	set_camera(pinhole_ptr);
 	

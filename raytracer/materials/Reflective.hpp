@@ -9,12 +9,16 @@ class Reflective: public Phong {
         PerfectSpecular* reflective_brdf;   
 
     public:
-    // constructors, access functions, etc.
-    Reflective();
-    Reflective(PerfectSpecular*);
-    Reflective(Lambertian* amb, Lambertian* dif, GlossySpecular* spec, PerfectSpecular*);
+        // constructors, access functions, etc.
+        Reflective();
+        Reflective(PerfectSpecular*);
+        Reflective(Lambertian* amb, Lambertian* dif, GlossySpecular* spec, PerfectSpecular*);
 
-    ~Reflective() = default;
+        ~Reflective() = default;
 
-    virtual RGBColor shade(ShadeInfo& sr) override;    
+        virtual RGBColor shade(ShadeInfo& sr) override;   
+
+        // Access Methods 
+        void set_kr(const float kr);
+        void set_cr(const float cr);
 };

@@ -19,4 +19,8 @@ class PointLight : public Light{
 
         virtual Vector3D get_direction(ShadeInfo& si);
         virtual RGBColor L(ShadeInfo& si);
+
+        // Access Methods
+        void set_location(const float x, const float y, const float z);
+        void scale_radiance(const float f);
 };

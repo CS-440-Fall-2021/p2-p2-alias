@@ -1,9 +1,4 @@
-// 	Copyright (C) Kevin Suffern 2000-2007.
-//	This C++ code is for non-commercial purposes only.
-//	This C++ code is licensed under the GNU General Public License Version 2.
-//	See the file COPYING.txt for the full license.
-
-
+// The following code uses the course book Raytracer from the Ground Up as a reference.
 
 #include "Compound.hpp"
 					
@@ -96,19 +91,7 @@ Compound::delete_objects(void) {
 }
 
 
-//------------------------------------------------------------------ copy_objects
-
-void
-Compound::copy_objects(const std::vector<Geometry*>& rhs_ojects) {
-	// delete_objects();    	
-	// int num_objects = rhs_ojects.size();
-	
-	// for (int j = 0; j < num_objects; j++)
-	// 	objects.push_back(rhs_ojects[j]->clone());
-}
-
-
-//------------------------------------------------------------------ hit
+//------------------------------------------------------------------ hit-similar to world::hit
 
 bool 															 
 Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
@@ -118,12 +101,12 @@ Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
 	bool hit = false;
 	t = kHugeValue;
 	int num_objects	= objects.size();
-	
+	// the material from the nearest object hit is stored in the GeometricObject base class data member material_ptr.
 	for (int j = 0; j < num_objects; j++){
 		if (objects[j]->hit(ray, t, sr) && (t <= tmin)) {
 			hit				= true;
 			tmin 			= t;
-			material_ptr = (objects[j]->get_material());
+			material_ptr = (objects[j]->get_material()); 
 			normal			= sr.normal;
 			local_hit_point	= sr.hit_point;  
 		}

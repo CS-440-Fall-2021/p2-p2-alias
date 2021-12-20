@@ -194,7 +194,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
     // float tz_max = (z1 - oz) / ray.d.z;
 
     float tx_min, tx_max, ty_min, ty_max, tz_min, tz_max; 
-    double a = 1.0 / ray.d.x;
+    float a = 1.0 / ray.d.x;
 
     if (a >= 0)
     {
@@ -210,7 +210,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         tx_min = kHugeValue;
         tx_max = kEpsilon ;
     }
-    double b = 1.0 / ray.d.y;
+    float b = 1.0 / ray.d.y;
     if (b >= 0)
     {
         ty_min = (y0 - oy) * b;
@@ -226,7 +226,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         ty_max = kEpsilon ;
     }
 
-    double c = 1.0 / ray.d.z;
+    float c = 1.0 / ray.d.z;
     if (c >= 0)
     {
         tz_min = (z0 - oz) * c;

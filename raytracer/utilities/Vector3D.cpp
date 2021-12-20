@@ -7,13 +7,13 @@ Vector3D::Vector3D(){
     z = 0;
 }
 
-Vector3D::Vector3D(double c){
+Vector3D::Vector3D(float c){
     x = c;
     y = c;
     z = c;
 }
 
-Vector3D::Vector3D(double _x, double _y, double _z){
+Vector3D::Vector3D(float _x, float _y, float _z){
     x = _x;
     y = _y;
     z = _z;
@@ -58,11 +58,11 @@ Vector3D Vector3D::operator-=(const Vector3D &v){
 } 
 
 
-Vector3D Vector3D::operator*(const double a) const{
+Vector3D Vector3D::operator*(const float a) const{
     return Vector3D(x*a, y*a, z*a);
 }
 
-Vector3D Vector3D::operator/(const double a) const{
+Vector3D Vector3D::operator/(const float a) const{
     return Vector3D(x/a, y/a, z/a);
 }
 
@@ -78,16 +78,16 @@ Vector3D Vector3D::hat() const{
 }
 
 
-double Vector3D::length() const{
+float Vector3D::length() const{
     return sqrt(x*x + y*y + z*z);
 }
 
-double Vector3D::len_squared() const{
+float Vector3D::len_squared() const{
     return x*x + y*y + z*z;
 }
 
 
-double Vector3D::operator*(const Vector3D &b) const{
+float Vector3D::operator*(const Vector3D &b) const{
     return x*b.x + y*b.y + z*b.z;
 }
 
@@ -98,7 +98,7 @@ Vector3D Vector3D::operator^(const Vector3D &v) const{
 }
 
 
-Vector3D operator*(const double a, const Vector3D &v){
+Vector3D operator*(const float a, const Vector3D &v){
     return v*a;
 }
 

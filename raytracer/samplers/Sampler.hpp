@@ -57,7 +57,7 @@ public:
 
   void set_num_samples(int nsm);
   void set_num_sets(int ns);
-  void setup_shuffled_indices(int ns);
+  void setup_shuffled_indices();
   virtual void generate_samples() = 0;
   int get_num_samples();
 

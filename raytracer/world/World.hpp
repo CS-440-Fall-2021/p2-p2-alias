@@ -75,5 +75,6 @@ public:
   // Returns appropriate shading information corresponding to intersection of
   // the ray with the scene geometry.
   ShadeInfo hit_objects(const Ray &ray);
+  void add_obj(const char *path, Material *mPtr);
   
 };

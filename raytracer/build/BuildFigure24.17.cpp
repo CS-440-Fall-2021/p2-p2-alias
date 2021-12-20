@@ -74,7 +74,7 @@ World::build(void) {
 	// the walls, the ceiling, and the floor of the room are defined as planes
 	// the shape is a cube
 	
-	double room_size = 11.0;
+	float room_size = 11.0;
 	
 	// floor  (-ve yw)
 	
@@ -138,8 +138,8 @@ World::build(void) {
 	// mirrors on the walls
 	// the right wall has no mirror
 	
-	double mirror_size 	= 8;  	// the mirror size
-	double offset 		= 1.0;  // the mirror offset from the walls
+	float mirror_size 	= 8;  	// the mirror size
+	float offset 		= 1.0;  // the mirror offset from the walls
 	
 	// mirror material
 	// this has no direct illumination and a slight green tint
@@ -196,7 +196,7 @@ World::build(void) {
 	reflective_ptr3->set_kr(1);
 	reflective_ptr3->set_cr(1, 1, 0.5);  // lemon
 	
-	double yw = -4.0;   // the yw location of the mirror
+	float yw = -4.0;   // the yw location of the mirror
 	
 	p0 = Point3D(-mirror_size, yw, -mirror_size);
 	a = Vector3D(0, 0, 2.0 * mirror_size);

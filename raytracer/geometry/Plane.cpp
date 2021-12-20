@@ -33,8 +33,8 @@ std::string Plane::to_string() const{
 
 bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const{
    // the following code is taken from the book
-    double ti = (a - ray.o) * n / (ray.d * n);
-    if (ti > kEpsilon && ti < t)
+    float ti = (a - ray.o) * n / (ray.d * n);
+    if (ti > kEpsilon && (ti < t))
     {
         t=ti;
         s.normal=n;
@@ -76,6 +76,6 @@ BBox Plane::getBBox() const{
 	    PMAX = Point3D(inf, inf, inf);
     }
 
-    return BBox(PMIN, PMAX);
+    return BBox();
     
 }

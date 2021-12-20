@@ -16,7 +16,7 @@ Reflective::Reflective(Lambertian* amb, Lambertian* dif, GlossySpecular* spec, P
 RGBColor Reflective::shade(ShadeInfo& sr) {
     RGBColor L(Phong::shade(sr)); // direct illumination
     
-    Vector3D wo = -sr.ray.d;
+    Vector3D wo = -1*sr.ray.d;
     Vector3D wi;
     RGBColor fr = reflective_brdf->sample_f(sr, wi, wo);
     Ray reflected_ray(sr.hit_point, wi); 

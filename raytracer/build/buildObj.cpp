@@ -55,15 +55,17 @@ void World::add_obj(const char *path, Material *mPtr)
 
     // now we have four arrays 1) Vertices 2) Normals 3) Vertex Indices 4) Normal Indices
     // to get faces we need to iterate over vertex indices and normal indices and create triangles
-    for (int i = 0; i < vertex_indices.size(); i += 3)
+    for (size_t i = 0; i < vertex_indices.size(); i += 3)
     {
         Triangle *triangle = new Triangle(vertices[vertex_indices[i] - 1],
                                           vertices[vertex_indices[i + 1] - 1],
                                           vertices[vertex_indices[i + 2] - 1]);
         triangle->set_material(mPtr);
+        // std::cout<<triangle->to_string();
         // triangle->set_normal(normals[normal_indices[i] - 1],
         //                      normals[normal_indices[i + 1] - 1],
         //                      normals[normal_indices[i + 2] - 1]);
         add_geometry(triangle);
+        // grid_ptr->add_object(triangle);
     }
 }

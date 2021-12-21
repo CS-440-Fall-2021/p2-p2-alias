@@ -5,11 +5,9 @@ MultiJittered::MultiJittered(): Sampler(){
 }
 
 MultiJittered::MultiJittered(int num_samples) : Sampler(num_samples){
-    generate_samples();
 }
 
 MultiJittered::MultiJittered(const MultiJittered& other): Sampler(other) {
-    generate_samples();
 }
 
 MultiJittered &MultiJittered::operator=(const MultiJittered &rhs){

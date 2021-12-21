@@ -61,9 +61,11 @@ World::build(void) {
   Camera *cam = new Pinhole(Point3D(0, 0, 30), Point3D(0, 0, -100), 1000);
   cam->compute_uvw();
   set_camera(cam);
-  // sampler_ptr = new MultiJittered(10);
-  // sampler_ptr->map_samples_to_hemisphere(10);
-  sampler_ptr = new Simple(cam, &vplane);
+  sampler_ptr = new MultiJittered(10);
+  sampler_ptr->set_num_sets(vplane.hres * vplane.vres);
+  sampler_ptr->generate_samples();
+  sampler_ptr->map_samples_to_hemisphere(10);
+  // sampler_ptr = new Simple(cam, &vplane);
   // sampler_ptr->setup_shuffled_indices();
   // sampler_ptr->map_samples_to_hemisphere(2);
 
@@ -79,7 +81,7 @@ World::build(void) {
   RGBColor lightPurple(0.65, 0.3, 1);  // light purple
   RGBColor darkPurple(0.5, 0, 1);  // dark purple
   RGBColor grey(0.25);  // grey
-  RGBColor white(1);  // grey
+  RGBColor white(1);  // white
 
   ambient_ptr = new AmbientLight(0.5, white);
   Light *directional_ptr = new Directional(1, white, Vector3D(0.2, -1, -1));
@@ -109,7 +111,7 @@ World::build(void) {
   Point3D a(2.5, -5, 1); 
   Point3D b(14, -1, 0); 
   Point3D c(8.5, 5, 0.5); 
-  Triangle* triangle_ptr = new Triangle(a, b, c);
+  Triangle* triangle_ptr = new Triangle(a, b, c, (b-a) ^ (c-a));
   triangle_ptr->set_material(new Reflective(ambient_brdf, diff_ptr_2, gs, ps1));
   // add_geometry(triangle_ptr);
   grid_ptr->add_object(triangle_ptr);

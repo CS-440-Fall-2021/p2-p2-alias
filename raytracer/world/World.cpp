@@ -1,6 +1,10 @@
 #include "World.hpp"
 #include "../BRDF/Lambertian.hpp"
+#include "../BRDF/GlossySpecular.hpp"
+#include "../BRDF/PerfectSpecular.hpp"
 #include "../materials/Matte.hpp"
+#include "../materials/Phong.hpp"
+#include "../materials/Reflective.hpp"
 
 World::World(){
     camera_ptr = NULL;
@@ -215,7 +219,9 @@ void World::load_scene(std::string filename, bool load_colors)
         triangle_ptr = new Triangle(points[a], points[b], points[c], normals[a], normals[b], normals[c]);
 		Lambertian *amb = new Lambertian(1.0, face_color);
 		Lambertian *diff = new Lambertian(1.0, face_color);
-        triangle_ptr->set_material(new Matte(amb, diff));
+        GlossySpecular *gs = new GlossySpecular(0.001, white, 100000);
+        PerfectSpecular *ps = new PerfectSpecular(0.5, face_color);
+        triangle_ptr->set_material(new Reflective(amb, diff, gs, ps));
 
         grid_ptr->add_object(triangle_ptr);
     }

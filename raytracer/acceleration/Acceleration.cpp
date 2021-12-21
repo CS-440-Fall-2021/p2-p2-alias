@@ -82,12 +82,9 @@ void Acceleration::setup_cells(void)
     double wz = p1.z - p0.z; // grid extent in z-direction
     double multiplier = 2.0; // about 8 times more cells than objects
     double s = pow(wx * wy * wz / num_objects, 0.3333333);
-    // nx = multiplier * wx / s + 1;
-    // ny = multiplier * wy / s + 1;
-    // nz = multiplier * wz / s + 1;
-    nx = 30;
-    ny = 30;
-    nz = 30;
+    nx = multiplier * wx / s + 1;
+    ny = multiplier * wy / s + 1;
+    nz = multiplier * wz / s + 1;
 
     // set up the array of cells with null pointers
     int num_cells = nx * ny * nz;

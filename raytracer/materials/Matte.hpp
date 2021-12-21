@@ -9,7 +9,7 @@
 class Matte : public Material {
 public:
     // Constructors.
-    Matte() = default;
+    Matte();
     Matte(Lambertian* ambient_brdf_, Lambertian* diffuse_brdf_);
 
     // Copy constuctor and assignment operator.

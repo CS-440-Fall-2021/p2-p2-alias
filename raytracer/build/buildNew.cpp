@@ -18,8 +18,10 @@
 #include "../materials/Cosine.hpp"
 
 #include "../tracers/Basic.hpp"
+#include "../tracers/Whitted.hpp"
 
 #include "../samplers/Simple.hpp"
+#include "../samplers/MultiJittered.hpp"
 
 #include "../lights/Directional.hpp"
 #include "../lights/AmbientLight.hpp"
@@ -54,13 +56,16 @@ World::build(void) {
   vplane.bottom_right.z = 600;
   vplane.hres = 1000;
   vplane.vres = 1000;
+  vplane.max_depth = 2;
 
-  tracer_ptr = new Basic(this);
+  tracer_ptr = new Whitted(this);
   Acceleration* g_ptr = new Acceleration(50, 50, 50);
 
-  ambient_ptr = new AmbientLight(0.4, RGBColor(0.6,0.6,0.6));
-  Light *directional = new Directional(0.9, white, Vector3D(0.01, -1, -1)); 
+  ambient_ptr = new AmbientLight(0.4, RGBColor(0.1,0.1,0.1));
+  Light *directional = new Directional(1.0, white, Vector3D(0.01, -1, -1)); 
+  Light *directional1 = new Directional(1.0, white, Vector3D(0.01, -1, -1)); 
   add_light(directional);
+  add_light(directional1);
     
   bg_color = black;  // background color.
 
@@ -68,7 +73,11 @@ World::build(void) {
   Camera *cam = new Pinhole(Point3D(0,0,700), Point3D(0,0,-200), 100);
   cam->compute_uvw();
   set_camera(cam);
-  sampler_ptr = new Simple(camera_ptr, &vplane);
+  sampler_ptr = new Simple(cam, &vplane);
+  sampler_ptr = new MultiJittered(10);
+  sampler_ptr->set_num_sets(vplane.get_hres() * vplane.get_vres());
+  sampler_ptr->generate_samples();
+  sampler_ptr->map_samples_to_hemisphere(10);
   set_acceleration(g_ptr);
 
 

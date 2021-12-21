@@ -20,5 +20,5 @@ class Reflective: public Phong {
 
         // Access Methods 
         void set_kr(const double kr);
-        void set_cr(const double cr);
+        void set_cr(const RGBColor cr);
 };

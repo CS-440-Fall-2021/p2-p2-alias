@@ -9,7 +9,7 @@
 class Phong: public Material{
     public:
         // Constructors
-        Phong(void);
+        Phong();
         Phong(Lambertian* , Lambertian* , GlossySpecular*);
         virtual RGBColor shade(ShadeInfo& sr) override;
         // Access Methods

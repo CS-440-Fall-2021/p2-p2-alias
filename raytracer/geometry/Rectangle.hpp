@@ -28,7 +28,7 @@ protected:
 public:
   // Constructors.
   Rectangle();
-  Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b);
+  Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b, const Vector3D n);
 
   // Copy constructor and assignment operator.
   Rectangle (const Rectangle &object) = default;

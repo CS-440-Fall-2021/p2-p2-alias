@@ -15,6 +15,9 @@ RGBColor Matte::shade(ShadeInfo& sinfo){
     return (L);
 }
 
+Matte::Matte(): ambient_brdf(new Lambertian), diffuse_brdf(new Lambertian){
+}
+
 Matte::Matte(Lambertian* ambient_brdf_, Lambertian* diffuse_brdf_){
     ambient_brdf = ambient_brdf_;
     diffuse_brdf = diffuse_brdf_;

@@ -11,12 +11,12 @@ Rectangle::Rectangle()
     b_len_squared = b.len_squared();
 }
 
-Rectangle::Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b)
+Rectangle::Rectangle(const Point3D& _p0, const Vector3D& _a, const Vector3D& _b, const Vector3D n)
 {
     p0 = _p0;
     a = _a;
     b = _b;
-    normal = a ^ b;
+    normal = n;
     normal.normalize();
     a_len_squared = a.len_squared();
     b_len_squared = b.len_squared();

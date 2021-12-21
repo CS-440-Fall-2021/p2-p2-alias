@@ -1,9 +1,9 @@
 #include "Phong.hpp"
 
 Phong::Phong(){
-    ambient_brdf = nullptr;
-    diffuse_brdf = nullptr;
-    specular_brdf = nullptr;
+    ambient_brdf = new Lambertian();
+    diffuse_brdf = new Lambertian();
+    specular_brdf = new GlossySpecular();
 
 }
 

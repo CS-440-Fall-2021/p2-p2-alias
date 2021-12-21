@@ -107,11 +107,10 @@ Compound::copy_objects(const std::vector<Geometry*>& rhs_ojects) {
 
 bool 															 
 Compound::hit(const Ray& ray, double& tmin, ShadeInfo & sr) const {
-	double	t; 
+	double	t = tmin; 
 	Vector3D normal;
 	Point3D	local_hit_point;
 	bool hit = false;
-	t = kHugeValue;
 	int num_objects	= objects.size();
 	// the material from the nearest object hit is stored in the GeometricObject base class data member material_ptr.
 	for (int j = 0; j < num_objects; j++){

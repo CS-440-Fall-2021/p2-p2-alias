@@ -19,11 +19,13 @@
 class Triangle : public Geometry {
 protected:
   Point3D v0, v1, v2; // the vertices. they must not be colinear.
+  Vector3D n0, n1, n2;
 
 public:
   // Constructors. Passed vertices are assumed to be ordered for orientation,
   Triangle(); // triangle with vertices at origin.
-  Triangle(const Point3D &, const Point3D &, const Point3D &); // set vertices.
+  Triangle(const Point3D &, const Point3D &, const Point3D &, const Vector3D&); // set vertices.
+  Triangle(const Point3D &, const Point3D &, const Point3D &, const Vector3D&, const Vector3D&, const Vector3D&); // set vertices.
 
   // Copy constructor and assignment operator.
   Triangle(const Triangle &object);
@@ -36,7 +38,9 @@ public:
   std::string to_string() const override;
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
-  virtual bool hit(const Ray &ray, float &t, ShadeInfo &s) const override;
+  virtual bool hit(const Ray &ray, double &t, ShadeInfo &s) const override;
+  Triangle *clone() const;
+  Vector3D interpolate_normals(double, double) const;
 
   // Get bounding box.
   virtual BBox getBBox() const override;

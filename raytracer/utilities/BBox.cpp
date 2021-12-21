@@ -15,18 +15,18 @@ std::string BBox::to_string() const
     return ("BBox min point: " + pmin.to_string() + ", max point: " + pmax.to_string());
 }
 
-bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const
+bool BBox::hit(const Ray &ray, double &t_enter, double &t_exit) const
 {
 
-    float ox = ray.o.x;
-    float oy = ray.o.y;
-    float oz = ray.o.z;
-    float dx = ray.d.x;
-    float dy = ray.d.y;
-    float dz = ray.d.z;
-    float tx_min, ty_min, tz_min;
-    float tx_max, ty_max, tz_max;
-    float a = 1.0 / dx;
+    double ox = ray.o.x;
+    double oy = ray.o.y;
+    double oz = ray.o.z;
+    double dx = ray.d.x;
+    double dy = ray.d.y;
+    double dz = ray.d.z;
+    double tx_min, ty_min, tz_min;
+    double tx_max, ty_max, tz_max;
+    double a = 1.0 / dx;
 
     if (a >= 0)
     {
@@ -42,7 +42,7 @@ bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const
         tx_min = kEpsilon;
         tx_max = kHugeValue;
     }
-    float b = 1.0 / dy;
+    double b = 1.0 / dy;
     if (b >= 0)
     {
         ty_min = (pmin.y - oy) * b;
@@ -58,7 +58,7 @@ bool BBox::hit(const Ray &ray, float &t_enter, float &t_exit) const
         ty_max = kHugeValue;
     }
     
-    float c = 1.0 / dz;
+    double c = 1.0 / dz;
     if (c >= 0)
     {
         tz_min = (pmin.z - oz) * c;

@@ -12,7 +12,7 @@
 #include <iostream>
 
 #include <limits>
-#define inf std::numeric_limits<float>::infinity()
+#define inf std::numeric_limits<double>::infinity()
 
 class Rectangle  : public Geometry {
 protected:
@@ -22,8 +22,8 @@ protected:
   Vector3D		b;				// side
 
   Vector3D normal;
-  float a_len_squared;
-  float b_len_squared;
+  double a_len_squared;
+  double b_len_squared;
 
 public:
   // Constructors.
@@ -41,7 +41,8 @@ public:
   virtual std::string to_string() const override;
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
-  virtual bool hit(const Ray &ray, float &t, ShadeInfo &s) const override;
+  virtual bool hit(const Ray &ray, double &t, ShadeInfo &s) const override;
+  Rectangle *clone() const;
   
   // Get bounding box.
   virtual BBox getBBox() const override;

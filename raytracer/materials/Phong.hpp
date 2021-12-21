@@ -13,12 +13,12 @@ class Phong: public Material{
         Phong(Lambertian* , Lambertian* , GlossySpecular*);
         virtual RGBColor shade(ShadeInfo& sr) override;
         // Access Methods
-        virtual void set_ks(const float ks);
-        virtual void set_cs(const float cs);
-        virtual void set_ka(const float ka);
-        virtual void set_kd(const float kd);
+        virtual void set_ks(const double ks);
+        virtual void set_cs(const double cs);
+        virtual void set_ka(const double ka);
+        virtual void set_kd(const double kd);
         virtual void set_cd(const RGBColor& c);
-        virtual void set_exp(const float exp);
+        virtual void set_exp(const double exp);
 
     protected:
         Lambertian* ambient_brdf;

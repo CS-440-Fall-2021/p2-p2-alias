@@ -17,12 +17,12 @@ protected:
   Point3D lookat;
   Vector3D up;
   Vector3D u, v, w;
-  float exposure_time;
+  double exposure_time;
 public:
   // Constructors.
   Camera();
   Camera(Point3D eye_, Point3D lookat_, Vector3D up_);
-  Camera(Point3D eye_, Point3D lookat_, Vector3D up_, float expos_time);
+  Camera(Point3D eye_, Point3D lookat_, Vector3D up_, double expos_time);
 
   // Copy constuctor and assignment operator.
   Camera(const Camera &camera) = default;

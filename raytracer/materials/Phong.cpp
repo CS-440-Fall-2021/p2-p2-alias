@@ -21,7 +21,7 @@ RGBColor Phong::shade(ShadeInfo& sr) {
 
     for (int j = 0; j < num_lights; j++) {
         Vector3D wi = sr.w->lights[j]->get_direction(sr);
-        float ndotwi = sr.normal * wi;
+        double ndotwi = sr.normal * wi;
 
         if (ndotwi > 0.0) 
             L += ( diffuse_brdf->f(sr, wi, wo) + 
@@ -31,19 +31,19 @@ RGBColor Phong::shade(ShadeInfo& sr) {
     return (L);
 }
 
-void Phong::set_ks(const float ks){
+void Phong::set_ks(const double ks){
     specular_brdf->set_ks(ks);
 }
 
-void Phong::set_cs(const float cs){
+void Phong::set_cs(const double cs){
     specular_brdf->set_cs(cs);
 }
 
-void Phong::set_ka(const float ka){
+void Phong::set_ka(const double ka){
     ambient_brdf->set_kd(ka);
 }
 
-void Phong::set_kd(const float kd){
+void Phong::set_kd(const double kd){
     diffuse_brdf->set_kd(kd);
 }
 
@@ -52,6 +52,6 @@ void Phong::set_cd(const RGBColor& c){
     diffuse_brdf->set_cd(c);
 }
 
-void Phong::set_exp(const float exp){
+void Phong::set_exp(const double exp){
     specular_brdf->set_exp(exp);
 }

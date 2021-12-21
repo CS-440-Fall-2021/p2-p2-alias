@@ -21,10 +21,8 @@
 #include <vector>
 
 #include "../utilities/RGBColor.hpp"
-#include "../utilities/RGBColor.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../geometry/Geometry.hpp"
-#include "../lights/Light.hpp"
 #include "../acceleration/Acceleration.hpp"
 #include "../lights/Light.hpp"
 #include "ViewPlane.hpp"
@@ -76,5 +74,6 @@ public:
   // the ray with the scene geometry.
   ShadeInfo hit_objects(const Ray &ray);
   void add_obj(const char *path, Material *mPtr);
+  void load_scene(std::string filename, bool load_colors);
   
 };

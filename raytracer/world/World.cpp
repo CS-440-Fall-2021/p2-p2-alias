@@ -1,4 +1,6 @@
 #include "World.hpp"
+#include "../BRDF/Lambertian.hpp"
+#include "../materials/Matte.hpp"
 
 World::World(){
     camera_ptr = NULL;
@@ -29,7 +31,7 @@ void World::set_acceleration(Acceleration *g_ptr){
 
 ShadeInfo World::hit_objects(const Ray &ray){
     ShadeInfo sf(*this);
-    float t = kHugeValue;
+    double t = kHugeValue;
     for (const auto &g: geometry){
         if (g->hit(ray, t, sf) & (sf.t > t)) //if the ray hits the object
         {
@@ -57,7 +59,7 @@ void World::load_OBJ(const char* file_name){
 	std::vector<int> vertex_position_indicies;
 
 	std::stringstream ss;
-	std::ifstream in_file(file_name);
+	std::ifstream in_file = std::ifstream(file_name);
 	std::string line = "";
 	std::string prefix = "";
 	int temp_index = 0;
@@ -128,12 +130,95 @@ void World::load_OBJ(const char* file_name){
 		v0 = vertex_positions.at(*it-1);
 		v1 = vertex_positions.at(*(it+1)-1);
 		v2 = vertex_positions.at(*(it+2)-1);
- 		triangle_ptr = new Triangle(v0, v1, v2);
-		triangle_ptr->set_material(new Cosine(blue));
+ 		triangle_ptr = new Triangle(v0, v1, v2, Vector3D((v1 - v0) ^ (v2 - v0)));
+		Lambertian *amb = new Lambertian(0.3, white);
+		Lambertian *diff = new Lambertian(1.0, white);
+		triangle_ptr->set_material(new Matte(amb, diff));
         // add_geometry(triangle_ptr);
 		grid_ptr->add_object(triangle_ptr);
 	}
-	// grid_ptr->setup_cells(); // must be called after all adding all triangles
+	grid_ptr->setup_cells(); // must be called after all adding all triangles
 	//Loaded success
 	std::cout << "OBJ file loaded!" << "\n";
+}
+
+
+void World::load_scene(std::string filename, bool load_colors)
+{
+    std::ifstream infile(filename);
+
+    int n_points, n_faces;
+    double x, y, z, nx, ny, nz, s, t,red, green, blue, alpha;
+    std::string data;
+
+    std::getline(infile, data);         // ply
+    std::getline(infile, data);         // format ascii 1.0
+    std::getline(infile, data);         // comment Created by Blender 3.0.0 - www.blender.org
+    infile >> data >> data >> n_points; // element vertex N_POINTS
+    std::getline(infile, data);         // \n
+    std::getline(infile, data);         // property double x
+    std::getline(infile, data);         // property double y
+    std::getline(infile, data);         // property double z
+    std::getline(infile, data);         // property double nx
+    std::getline(infile, data);         // property double ny
+    std::getline(infile, data);         // property double nz
+    std::getline(infile, data);         // property double s
+    std::getline(infile, data);         // property double t
+    std::getline(infile, data);         // property uchar red
+    std::getline(infile, data);         // property uchar green
+    std::getline(infile, data);         // property uchar blue
+    std::getline(infile, data);         // property uchar alpha
+    infile >> data >> data >> n_faces;  // element face N_FACES
+    std::getline(infile, data);         // \n
+    std::getline(infile, data);         // property list uchar uint vertex_indices
+    std::getline(infile, data);         // end_header
+
+    Point3D *points = new Point3D[n_points];
+    RGBColor *colors = new RGBColor[n_points];
+    Vector3D *normals = new Vector3D[n_points];
+
+    std::cout << "N_POINTS: " << n_points << std::endl;
+    std::cout << "N_FACES: " << n_faces << std::endl;
+
+    // reading the vertices
+    for (int i = 0; i < n_points; i++)
+    {
+        infile >> x >> y >> z >> nx >> ny >> nz >> s >> t >> red >> green >> blue >> alpha;
+
+        points[i] = Point3D(x, y, z);
+
+        normals[i] = Vector3D(nx, ny, nz);
+        normals[i].normalize();
+
+        // assigning vertex colors
+        if (load_colors)
+        {
+            colors[i] = RGBColor(red / (double)256.0, green / (double)256.0, blue / (double)256.0); // actual color from ply file
+        }
+        else
+        {
+            colors[i] = RGBColor(1.0); // white color
+        }
+    }
+
+    int n, a, b, c;
+    RGBColor face_color;
+    Triangle *triangle_ptr;
+
+    // reading the faces
+    for (int i = 0; i < n_faces; i++)
+    {
+        infile >> n >> a >> b >> c;
+
+        face_color = RGBColor(colors[a] / (double)3.0) + (colors[b] / (double)3.0) + (colors[c] / (double)3.0);
+
+        triangle_ptr = new Triangle(points[a], points[b], points[c], normals[a], normals[b], normals[c]);
+		Lambertian *amb = new Lambertian(1.0, face_color);
+		Lambertian *diff = new Lambertian(1.0, face_color);
+        triangle_ptr->set_material(new Matte(amb, diff));
+
+        grid_ptr->add_object(triangle_ptr);
+    }
+    std::cout << "loaded\n";
+    infile.close();
 }

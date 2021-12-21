@@ -18,8 +18,8 @@ MultiJittered &MultiJittered::operator=(const MultiJittered &rhs){
 }
 
 void MultiJittered::generate_samples(){
-    int n = (int) sqrt((float) num_samples);
-    float cell_width =  1.0 /(float)num_samples;
+    int n = (int) sqrt((double) num_samples);
+    double cell_width =  1.0 /(double)num_samples;
 
     Point3D fill_point;
     for (int i=0; i < num_samples * num_sets; i++)
@@ -29,8 +29,8 @@ void MultiJittered::generate_samples(){
         for (int j=0; j < n; j++){
             for (int k=0; k < n; k++){
                 int a = rand() % (n-1) + k;
-                samples[j * n + k + i * num_samples].x = (j * n + k) * cell_width + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-                samples[j * n + a + i * num_samples].y = (k * n + j) * cell_width + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+                samples[j * n + k + i * num_samples].x = (j * n + k) * cell_width + static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
+                samples[j * n + a + i * num_samples].y = (k * n + j) * cell_width + static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
             }
         }
     }
@@ -39,7 +39,7 @@ void MultiJittered::generate_samples(){
         for (int j=0; j < n; j++){
             for (int k=0; k < n; k++){
                 int a = rand() % (n-1) + k;
-                float t = samples[j * n + k + i * num_samples].x;
+                double t = samples[j * n + k + i * num_samples].x;
                 samples[j * n + k + i * num_samples].x = samples[j * n + a + i * num_samples].x;
                 samples[j * n + a + i * num_samples].x = t;
             }
@@ -50,7 +50,7 @@ void MultiJittered::generate_samples(){
         for (int j=0; j < n; j++){
             for (int k=0; k < n; k++){
                 int a = rand() % (n-1) + k;
-                float t = samples[k * n + j + i * num_samples].y;
+                double t = samples[k * n + j + i * num_samples].y;
                 samples[k * n + j + i * num_samples].y = samples[a * n + j + i * num_samples].y;
                 samples[a * n + j + i * num_samples].y = t;
             }

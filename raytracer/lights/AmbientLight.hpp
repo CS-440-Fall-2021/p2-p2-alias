@@ -4,12 +4,12 @@
 
 class AmbientLight : public Light{
     private:
-        float ls;
+        double ls;
         RGBColor color;
 
     public:
         AmbientLight();
-        AmbientLight(float l, RGBColor col);
+        AmbientLight(double l, RGBColor col);
         
         AmbientLight(const AmbientLight &other) = default;
         AmbientLight &operator=(const AmbientLight &rhs) = default;

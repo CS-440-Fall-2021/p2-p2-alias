@@ -9,7 +9,7 @@ RGBColor::RGBColor(){
     b = 0;
 }
 
-RGBColor::RGBColor(float c){
+RGBColor::RGBColor(double c){
     r = c;
     g = c;
     b = c;
@@ -17,7 +17,7 @@ RGBColor::RGBColor(float c){
     clamp();
 }
 
-RGBColor::RGBColor(float _r, float _g, float _b){
+RGBColor::RGBColor(double _r, double _g, double _b){
     r = _r;
     g = _g;
     b = _b;
@@ -42,20 +42,20 @@ RGBColor &RGBColor::operator+=(const RGBColor &c){
     return *this;
 }
 
-RGBColor RGBColor::operator*(const float a) const{
+RGBColor RGBColor::operator*(const double a) const{
     return RGBColor(r*a, g*a, b*a).clamp();
 }
 
-RGBColor &RGBColor::operator*=(const float a){
+RGBColor &RGBColor::operator*=(const double a){
     *this = RGBColor(r*a, g*a, b*a).clamp();
     return *this;
 }
 
-RGBColor RGBColor::operator/(const float a) const{
+RGBColor RGBColor::operator/(const double a) const{
     return RGBColor(r/a, g/a, b/a).clamp();
 }
 
-RGBColor &RGBColor::operator/=(const float a){
+RGBColor &RGBColor::operator/=(const double a){
     *this = RGBColor(r/a, g/a, b/a).clamp();
     return *this;
 }
@@ -68,22 +68,22 @@ bool RGBColor::operator==(const RGBColor &c) const{
     return ((r==c.r) & (g==c.g) & (b==c.b));
 }
 
-RGBColor RGBColor::powc(float p) const{
+RGBColor RGBColor::powc(double p) const{
     return RGBColor(pow(r, p), pow(g, p), pow(b, p)).clamp();
 }
 
-float RGBColor::average() const{
+double RGBColor::average() const{
     return (r+g+b)/3;
 }
 
 RGBColor RGBColor::clamp(){
-    float _r = std::max((float)0, std::min(r, (float)1));
-    float _g = std::max((float)0 , std::min(g, (float)1));
-    float _b = std::max((float)0 , std::min(b, (float)1));
+    double _r = std::max((double)0, std::min(r, (double)1));
+    double _g = std::max((double)0 , std::min(g, (double)1));
+    double _b = std::max((double)0 , std::min(b, (double)1));
     
     return RGBColor(_r, _g, _b);
 }
 
-RGBColor operator*(const float a, const RGBColor &c){
+RGBColor operator*(const double a, const RGBColor &c){
     return c * a;
 }

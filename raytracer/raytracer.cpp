@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
       RGBColor pixel_color(0);
       rays = sampler->get_rays(x, y);
       for (const auto &ray : rays) {
-        float weight = ray.w; // ray weight for the pixel.
+        double weight = ray.w; // ray weight for the pixel.
         ShadeInfo sinfo = world.hit_objects(ray);
         if (sinfo.hit) {
           pixel_color += weight * sinfo.material_ptr->shade(sinfo);

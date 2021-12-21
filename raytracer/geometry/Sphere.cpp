@@ -7,7 +7,7 @@ Sphere::Sphere()
     c = Point3D(0);
 }
 
-Sphere::Sphere(const Point3D &center, float radius)
+Sphere::Sphere(const Point3D &center, double radius)
 {
     c = center;
     r = radius;
@@ -33,24 +33,24 @@ std::string Sphere::to_string() const
     return out;
 }
 
-bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const
+bool Sphere::hit(const Ray &ray, double &t, ShadeInfo &s) const
 {      // the following code is taken from the book
-    float ti;
+    double ti;
     // std::cout<<(ray.o - c).to_string();
     ray.o - Point3D(1);
     Vector3D temp = ray.o - this->c;
-    float a = ray.d * ray.d;
-    float b = 2.0 * temp * ray.d;
-    float c_ = temp * temp - r * r;
-    float disc = b * b - 4.0 * a * c_;
+    double a = ray.d * ray.d;
+    double b = 2.0 * temp * ray.d;
+    double c_ = temp * temp - r * r;
+    double disc = b * b - 4.0 * a * c_;
     if (disc < 0.0)
     {
         return false;
     }
     else
     {
-        float e = sqrt(disc);
-        float denom = 2.0 * a;
+        double e = sqrt(disc);
+        double denom = 2.0 * a;
         ti = (-b - e) / denom;
 
         if ((ti > kEpsilon) && (ti <= t))
@@ -88,4 +88,8 @@ BBox Sphere::getBBox() const{
 	Point3D PMAX = Point3D(c.x + r, c.y + r, c.z + r);
 
 	return BBox(PMIN, PMAX);
+}
+
+Sphere *Sphere::clone() const{
+	return (new Sphere(*this));
 }

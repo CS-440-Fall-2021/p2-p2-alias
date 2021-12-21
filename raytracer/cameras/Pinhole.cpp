@@ -4,12 +4,12 @@
 Pinhole::Pinhole(): Camera(), d(0), zoom(1){
 }
 
-Pinhole::Pinhole(Point3D eye, Point3D lookat, float d_): Camera(eye, lookat, Vector3D()),
+Pinhole::Pinhole(Point3D eye, Point3D lookat, double d_): Camera(eye, lookat, Vector3D()),
                                                         d(d_){
 }
 
 Pinhole::Pinhole(Point3D eye, Point3D lookat, Vector3D up, 
-    float exposure_time, float d_, float zoom_): Camera(eye, lookat, up),
+    double exposure_time, double d_, double zoom_): Camera(eye, lookat, up),
                                                 d(d_), zoom(zoom_){
 }
 
@@ -44,7 +44,7 @@ void Pinhole::render_scene(World &w){
     // Ray ray;
     // int depth = 0;  
     // Point3D pp;		// sample point on a pixel
-    // int n = (int) sqrt( (float) sampler->get_num_samples());
+    // int n = (int) sqrt( (double) sampler->get_num_samples());
 
 	// ray.o = eye;
 		
@@ -54,8 +54,8 @@ void Pinhole::render_scene(World &w){
 			
 	// 		for (int p = 0; p < n; p++)			// up pixel
 	// 			for (int q = 0; q < n; q++) {	// across pixel
-	// 				float h = (viewplane.bottom_right.x - viewplane.top_left.x) / viewplane.hres;
-    //                 float v = (viewplane.top_left.y - viewplane.bottom_right.y) / viewplane.vres;
+	// 				double h = (viewplane.bottom_right.x - viewplane.top_left.x) / viewplane.hres;
+    //                 double v = (viewplane.top_left.y - viewplane.bottom_right.y) / viewplane.vres;
                     
     //                 // computing the position of the ray
     //                 pp.x = viewplane.top_left.x + h * (c + 0.5);

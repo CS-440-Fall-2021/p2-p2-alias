@@ -21,8 +21,8 @@ protected:
 public:
   // Constructors.
   Cosine();                          // set color to (0, 0, 0).
-  Cosine(float c);                   // set color to (c, c, c).
-  Cosine(float r, float g, float b); // set color to (r, g, b).
+  Cosine(double c);                   // set color to (c, c, c).
+  Cosine(double r, double g, double b); // set color to (r, g, b).
   Cosine(const RGBColor &c);         // set color to c.
 
   // Copy constuctor and assignment operator.

@@ -14,13 +14,13 @@
 
 class RGBColor {
 public:
-  float r, g, b; // red, green, and blue components in [0,1].
+  double r, g, b; // red, green, and blue components in [0,1].
 
 public:
   // Constructors.
   RGBColor();                             // set color to (0, 0, 0).
-  RGBColor(float c);                      // set color to (c, c, c).
-  RGBColor(float _r, float _g, float _b); // set color to (_r, _g, _b).
+  RGBColor(double c);                      // set color to (c, c, c).
+  RGBColor(double _r, double _g, double _b); // set color to (_r, _g, _b).
 
   // Destructor.
   ~RGBColor() = default;
@@ -35,18 +35,18 @@ public:
   // Operations.
   RGBColor operator+(const RGBColor &c) const; // addition.
   RGBColor &operator+=(const RGBColor &c);     // compound addition.
-  RGBColor operator*(const float a) const;     // multiplication by a float.
-  RGBColor &operator*=(const float a); // compound multiplication by a float.
-  RGBColor operator/(const float a) const; // division by a float.
-  RGBColor &operator/=(const float a);     // compound division by a float.
+  RGBColor operator*(const double a) const;     // multiplication by a double.
+  RGBColor &operator*=(const double a); // compound multiplication by a double.
+  RGBColor operator/(const double a) const; // division by a double.
+  RGBColor &operator/=(const double a);     // compound division by a double.
 
   RGBColor operator*(const RGBColor &c) const; // component-wise multiplication.
   bool operator==(const RGBColor &c) const;    // equality.
-  RGBColor powc(float p) const;                // raise components to a power.
-  float average() const;                       // the average of the components.
+  RGBColor powc(double p) const;                // raise components to a power.
+  double average() const;                       // the average of the components.
 
   RGBColor clamp();             // clamp r, g, b components within [0,1]
 };
 
-// Multiplication by a float.
-RGBColor operator*(const float a, const RGBColor &c);
+// Multiplication by a double.
+RGBColor operator*(const double a, const RGBColor &c);

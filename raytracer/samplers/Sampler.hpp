@@ -62,5 +62,5 @@ public:
   int get_num_samples();
 
   virtual Point3D sample_hemisphere();
-  void map_samples_to_hemisphere(const float p);
+  void map_samples_to_hemisphere(const double p);
 };

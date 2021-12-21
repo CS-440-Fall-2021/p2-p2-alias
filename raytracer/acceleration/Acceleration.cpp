@@ -11,18 +11,18 @@ Acceleration::Acceleration(int nx_, int ny_, int nz_): nx(nx_), ny(ny_), nz(nz_)
 
 Point3D Acceleration::min_coordinates(void)
 {
-    BBox bbox;
+    BBox bbox_;
     Point3D p0(kHugeValue);
     int num_objects = objects.size();
     for (int j = 0; j < num_objects; j++)
     {
-        bbox = objects[j]->getBBox();
-        if (bbox.pmin.x < p0.x)
-            p0.x = bbox.pmin.x;
-        if (bbox.pmin.y < p0.y)
-            p0.y = bbox.pmin.y;
-        if (bbox.pmin.z < p0.z)
-            p0.z = bbox.pmin.z;
+        bbox_ = objects[j]->getBBox();
+        if (bbox_.pmin.x < p0.x)
+            p0.x = bbox_.pmin.x;
+        if (bbox_.pmin.y < p0.y)
+            p0.y = bbox_.pmin.y;
+        if (bbox_.pmin.z < p0.z)
+            p0.z = bbox_.pmin.z;
     }
     p0.x -= kEpsilon;
     p0.y -= kEpsilon;
@@ -32,18 +32,18 @@ Point3D Acceleration::min_coordinates(void)
 
 Point3D Acceleration::max_coordinates(void)
 {
-    BBox bbox;
+    BBox bbox_;
     Point3D p0(kEpsilon);
     int num_objects = objects.size();
     for (int j = 0; j < num_objects; j++)
     {
-        bbox = objects[j]->getBBox();
-        if (bbox.pmax.x > p0.x)
-            p0.x = bbox.pmax.x;
-        if (bbox.pmax.y > p0.y)
-            p0.y = bbox.pmax.y;
-        if (bbox.pmax.z > p0.z)
-            p0.z = bbox.pmax.z;
+        bbox_ = objects[j]->getBBox();
+        if (bbox_.pmax.x > p0.x)
+            p0.x = bbox_.pmax.x;
+        if (bbox_.pmax.y > p0.y)
+            p0.y = bbox_.pmax.y;
+        if (bbox_.pmax.z > p0.z)
+            p0.z = bbox_.pmax.z;
     }
     p0.x += kEpsilon;
     p0.y += kEpsilon;
@@ -51,8 +51,8 @@ Point3D Acceleration::max_coordinates(void)
     return (p0);
 }
 
-inline float
-clamp(float x, float min, float max)
+inline double
+clamp(double x, double min, double max)
 {
     return (x < min ? min : (x > max ? max : x));
 }
@@ -71,14 +71,18 @@ void Acceleration::setup_cells(void)
     bbox.pmax.z = p1.z;
     // compute the number of cells in the x-, y-, and z-directions
     int num_objects = objects.size();
-    float wx = p1.x - p0.x; // grid extent in x-direction
-    float wy = p1.y - p0.y; // grid extent in y-direction
-    float wz = p1.z - p0.z; // grid extent in z-direction
-    float multiplier = 2.0; // about 8 times more cells than objects
-    float s = pow(wx * wy * wz / num_objects, 0.3333333);
-    nx = multiplier * wx / s + 1;
-    ny = multiplier * wy / s + 1;
-    nz = multiplier * wz / s + 1;
+    double wx = p1.x - p0.x; // grid extent in x-direction
+    double wy = p1.y - p0.y; // grid extent in y-direction
+    double wz = p1.z - p0.z; // grid extent in z-direction
+    double multiplier = 2.0; // about 8 times more cells than objects
+    double s = pow(wx * wy * wz / num_objects, 0.3333333);
+    // nx = multiplier * wx / s + 1;
+    // ny = multiplier * wy / s + 1;
+    // nz = multiplier * wz / s + 1;
+    nx = 30;
+    ny = 30;
+    nz = 30;
+
     // set up the array of cells with null pointers
     int num_cells = nx * ny * nz;
     cells.reserve(num_objects);
@@ -155,21 +159,21 @@ void Acceleration::setup_cells(void)
 
 
 
-bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
+bool Acceleration::hit(const Ray& ray, double& tmin, ShadeInfo& s) const{
 
     int ix, iy, iz;
-    float x0 = bbox.pmin.x;
-    float y0 = bbox.pmin.y;
-    float z0 = bbox.pmin.z;
-    float x1 = bbox.pmax.x;
-    float y1 = bbox.pmax.y;
-    float z1 = bbox.pmax.z;
+    double x0 = bbox.pmin.x;
+    double y0 = bbox.pmin.y;
+    double z0 = bbox.pmin.z;
+    double x1 = bbox.pmax.x;
+    double y1 = bbox.pmax.y;
+    double z1 = bbox.pmax.z;
 
-    float ox = ray.o.x;
-    float oy = ray.o.y;
-    float oz = ray.o.z;
+    double ox = ray.o.x;
+    double oy = ray.o.y;
+    double oz = ray.o.z;
 
-    float t0, t1 = 0.0;
+    double t0, t1 = 0.0;
 
     if (! bbox.hit(ray, t0, t1))
         return false;
@@ -186,15 +190,15 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
     }
 
-    // float tx_min = (x0 - ox) / ray.d.x;
-    // float tx_max = (x1 - ox) / ray.d.x;
-    // float ty_min = (y0 - oy) / ray.d.y;
-    // float ty_max = (y1 - oy) / ray.d.y;
-    // float tz_min = (z0 - oz) / ray.d.z;
-    // float tz_max = (z1 - oz) / ray.d.z;
+    // double tx_min = (x0 - ox) / ray.d.x;
+    // double tx_max = (x1 - ox) / ray.d.x;
+    // double ty_min = (y0 - oy) / ray.d.y;
+    // double ty_max = (y1 - oy) / ray.d.y;
+    // double tz_min = (z0 - oz) / ray.d.z;
+    // double tz_max = (z1 - oz) / ray.d.z;
 
-    float tx_min, tx_max, ty_min, ty_max, tz_min, tz_max; 
-    float a = 1.0 / ray.d.x;
+    double tx_min, tx_max, ty_min, ty_max, tz_min, tz_max; 
+    double a = 1.0 / ray.d.x;
 
     if (a >= 0)
     {
@@ -210,7 +214,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         tx_min = kHugeValue;
         tx_max = kEpsilon ;
     }
-    float b = 1.0 / ray.d.y;
+    double b = 1.0 / ray.d.y;
     if (b >= 0)
     {
         ty_min = (y0 - oy) * b;
@@ -226,7 +230,7 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         ty_max = kEpsilon ;
     }
 
-    float c = 1.0 / ray.d.z;
+    double c = 1.0 / ray.d.z;
     if (c >= 0)
     {
         tz_min = (z0 - oz) * c;
@@ -242,11 +246,11 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
         tz_max = kEpsilon ;
     }
 
-    float dtx = (tx_max - tx_min) / nx;
-    float dty = (ty_max - ty_min) / ny;
-    float dtz = (tz_max - tz_min) / nz;
+    double dtx = (tx_max - tx_min) / nx;
+    double dty = (ty_max - ty_min) / ny;
+    double dtz = (tz_max - tz_min) / nz;
     
-    float tx_next, ty_next, tz_next;
+    double tx_next, ty_next, tz_next;
     
     int ix_step, iy_step, iz_step;
     int ix_stop, iy_stop, iz_stop;
@@ -354,8 +358,12 @@ bool Acceleration::hit(const Ray& ray, float& tmin, ShadeInfo& s) const{
     }
 }
 
-bool Acceleration::shadow_hit(Ray &ray, float &tmin){return false;}
+bool Acceleration::shadow_hit(Ray &ray, double &tmin){return false;}
 
 BBox Acceleration::getBBox() const{
     return bbox;
+}
+
+Acceleration *Acceleration::clone(){
+	return (new Acceleration(*this));
 }

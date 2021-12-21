@@ -100,19 +100,19 @@ Compound::delete_objects(void) {
 
 void
 Compound::copy_objects(const std::vector<Geometry*>& rhs_ojects) {
-	// delete_objects();    	
-	// int num_objects = rhs_ojects.size();
+	delete_objects();    	
+	int num_objects = rhs_ojects.size();
 	
-	// for (int j = 0; j < num_objects; j++)
-	// 	objects.push_back(rhs_ojects[j]->clone());
+	for (int j = 0; j < num_objects; j++)
+		objects.push_back(rhs_ojects[j]->clone());
 }
 
 
 //------------------------------------------------------------------ hit
 
 bool 															 
-Compound::hit(const Ray& ray, float& tmin, ShadeInfo & sr) const {
-	float	t; 
+Compound::hit(const Ray& ray, double& tmin, ShadeInfo & sr) const {
+	double	t; 
 	Vector3D normal;
 	Point3D	local_hit_point;
 	bool hit = false;

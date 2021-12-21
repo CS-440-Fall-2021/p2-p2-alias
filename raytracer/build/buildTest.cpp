@@ -34,24 +34,24 @@ void World::build(void)
     sampler_ptr = new Simple(camera_ptr, &vplane);
     // construct viewplane, integrator, camera, and lights
     int num_spheres = 1000000;
-    float volume = 2.0 / num_spheres;
-    float radius = pow(0.75 * volume / 3.14159, 0.333333);
+    double volume = 2.0 / num_spheres;
+    double radius = pow(0.75 * volume / 3.14159, 0.333333);
     srand(15);
     for (int j = 0; j < num_spheres; j++)
     {
         Cosine *matte_ptr = new Cosine(RGBColor(
-            static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
-            static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
-            static_cast <float> (rand()) / static_cast <float> (RAND_MAX)
+            static_cast <double> (rand()) / static_cast <double> (RAND_MAX),
+            static_cast <double> (rand()) / static_cast <double> (RAND_MAX),
+            static_cast <double> (rand()) / static_cast <double> (RAND_MAX)
         ));
         // matte_ptr->set_ka(0.25);
         // matte_ptr->set_kd(0.75);
-        // matte_ptr->set_cd(static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
-        //                   static_cast <float> (rand()) / static_cast <float> (RAND_MAX), 
-        //                   static_cast <float> (rand()) / static_cast <float> (RAND_MAX););
-        Sphere *sphere_ptr = new Sphere(Point3D(10.0 - 20.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
-                                                10.0 - 20.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX),
-                                                10.0 - 20.0 * static_cast <float> (rand()) / static_cast <float> (RAND_MAX)), radius);
+        // matte_ptr->set_cd(static_cast <double> (rand()) / static_cast <double> (RAND_MAX),
+        //                   static_cast <double> (rand()) / static_cast <double> (RAND_MAX), 
+        //                   static_cast <double> (rand()) / static_cast <double> (RAND_MAX););
+        Sphere *sphere_ptr = new Sphere(Point3D(10.0 - 20.0 * static_cast <double> (rand()) / static_cast <double> (RAND_MAX),
+                                                10.0 - 20.0 * static_cast <double> (rand()) / static_cast <double> (RAND_MAX),
+                                                10.0 - 20.0 * static_cast <double> (rand()) / static_cast <double> (RAND_MAX)), radius);
         
         sphere_ptr->set_material(matte_ptr);
         grid_ptr->add_object(sphere_ptr);

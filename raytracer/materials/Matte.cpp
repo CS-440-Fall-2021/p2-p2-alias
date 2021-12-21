@@ -1,4 +1,5 @@
 #include "Matte.hpp"
+#include <iostream>
 
 RGBColor Matte::shade(ShadeInfo& sinfo){
     Vector3D wo = -sinfo.ray.d;
@@ -6,7 +7,7 @@ RGBColor Matte::shade(ShadeInfo& sinfo){
     int numLights = sinfo.w->lights.size();
     for (int j = 0; j < numLights; j++) {
         Vector3D wi = sinfo.w->lights[j]->get_direction(sinfo);
-        float ndotwi = sinfo.normal * wi;
+        double ndotwi = sinfo.normal * wi;
         if (ndotwi > 0.0){
             L += diffuse_brdf->f(sinfo, wo, wi) * sinfo.w->lights[j]->L(sinfo) * ndotwi;
         }
@@ -19,11 +20,11 @@ Matte::Matte(Lambertian* ambient_brdf_, Lambertian* diffuse_brdf_){
     diffuse_brdf = diffuse_brdf_;
 }
 
-void Matte::set_ka(const float ka){
+void Matte::set_ka(const double ka){
     ambient_brdf->set_kd(ka);
 }
 
-void Matte::set_kd(const float kd){
+void Matte::set_kd(const double kd){
     diffuse_brdf->set_kd(kd);
 }
 

@@ -26,7 +26,7 @@ public:
   Vector3D normal;        // normal at hit point.
   Ray ray;                // the ray that hit.
   int depth;              // recursion depth.
-  float t;                // ray parameter at hit point.
+  double t;                // ray parameter at hit point.
   const World *w;         // pointer to the world.
 
 public:

@@ -10,7 +10,7 @@ Basic::Basic(World* w): Tracer(w) {
 RGBColor Basic::trace_ray(const Ray &ray, const int depth){
     RGBColor pixel_color(0);
 
-    float weight = ray.w; // ray weight for the pixel.
+    double weight = ray.w; // ray weight for the pixel.
     // std::cout << "Here Me out ;-;\n";
     ShadeInfo sinfo = world->hit_objects(ray);
     if (sinfo.hit) {

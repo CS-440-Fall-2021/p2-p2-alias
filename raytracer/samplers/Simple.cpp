@@ -23,12 +23,12 @@ Simple &Simple::operator=(const Simple &other){
 
 std::vector<Ray> Simple::get_rays(int px, int py) const{ 
     // computing hres and vres of one pixel
-    float h = (viewplane_ptr->bottom_right.x - viewplane_ptr->top_left.x) / viewplane_ptr->hres;
-    float v = (viewplane_ptr->top_left.y - viewplane_ptr->bottom_right.y) / viewplane_ptr->vres;
+    double h = (viewplane_ptr->bottom_right.x - viewplane_ptr->top_left.x) / viewplane_ptr->hres;
+    double v = (viewplane_ptr->top_left.y - viewplane_ptr->bottom_right.y) / viewplane_ptr->vres;
     
     // computing the position of the ray
-    float xpos = viewplane_ptr->top_left.x + h * (px + 0.5);
-    float ypos = viewplane_ptr->top_left.y - v * (py + 0.5);
+    double xpos = viewplane_ptr->top_left.x + h * (px + 0.5);
+    double ypos = viewplane_ptr->top_left.y - v * (py + 0.5);
     
     Point3D point = Point3D(xpos, ypos, viewplane_ptr->bottom_right.z);
     Vector3D dir = camera_ptr->ray_direction(point);

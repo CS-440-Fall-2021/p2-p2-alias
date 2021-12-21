@@ -31,9 +31,9 @@ std::string Plane::to_string() const{
     return out;
 }
 
-bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const{
+bool Plane::hit(const Ray &ray, double &t, ShadeInfo &s) const{
    // the following code is taken from the book
-    float ti = (a - ray.o) * n / (ray.d * n);
+    double ti = (a - ray.o) * n / (ray.d * n);
     if (ti > kEpsilon && (ti < t))
     {
         t=ti;
@@ -78,4 +78,8 @@ BBox Plane::getBBox() const{
 
     return BBox();
     
+}
+
+Plane *Plane::clone() const{
+	return (new Plane(*this));
 }

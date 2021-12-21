@@ -3,7 +3,7 @@
 Directional::Directional(): ls(1), color(1), dir(){
 }
 
-Directional::Directional(float l, RGBColor col, Vector3D dir): ls(l), color(col), dir(dir){
+Directional::Directional(double l, RGBColor col, Vector3D dir): ls(l), color(col), dir(dir){
 }
 
 Vector3D Directional::get_direction(ShadeInfo &si){

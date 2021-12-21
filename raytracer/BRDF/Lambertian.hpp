@@ -6,25 +6,25 @@
 class Lambertian{
     
     private:
-        float kd;
+        double kd;
         RGBColor cd;
     
     public:
 
         // Constructors.
         Lambertian() = default;
-        Lambertian(float kd_, RGBColor cd_);
+        Lambertian(double kd_, RGBColor cd_);
 
         // Destructor.
         ~Lambertian() = default;
 
         RGBColor f(const ShadeInfo& sr, const Vector3D& wi, const Vector3D& wo) const;
-        RGBColor sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo, float& pdf);
+        RGBColor sample_f(const ShadeInfo& sr, Vector3D& wi, const Vector3D& wo, double& pdf);
         RGBColor rho(const ShadeInfo& sr, const Vector3D& wo) const;
 
         // Access Methods.
-        void set_kd(const float _kd);
+        void set_kd(const double _kd);
         void set_cd(const RGBColor& _cd);
-        float get_kd() const;
+        double get_kd() const;
         RGBColor get_cd() const;
 };

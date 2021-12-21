@@ -4,11 +4,11 @@ Perspective::Perspective(){
     pos = Point3D();
 }   
 
-Perspective::Perspective(float c){
+Perspective::Perspective(double c){
     pos = Point3D(c);
 }
 
-Perspective::Perspective(float x, float y, float z){
+Perspective::Perspective(double x, double y, double z){
     pos = Point3D(x,y,z);
 }
 

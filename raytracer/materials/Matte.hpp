@@ -22,8 +22,8 @@ public:
     virtual RGBColor shade(ShadeInfo &sinfo) override;
 
     // Access Methods
-    void set_ka(const float ka);
-    void set_kd(const float kd);
+    void set_ka(const double ka);
+    void set_kd(const double kd);
     void set_cd(const RGBColor& c);
 
 private:

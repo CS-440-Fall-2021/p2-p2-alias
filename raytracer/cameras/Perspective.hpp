@@ -21,8 +21,8 @@ protected:
 public:
   // Constructors.
   Perspective();                          // set pos to origin.
-  Perspective(float c);                   // set pos to (c, c, c).
-  Perspective(float x, float y, float z); // set pos to (x, y, z)
+  Perspective(double c);                   // set pos to (c, c, c).
+  Perspective(double x, double y, double z); // set pos to (x, y, z)
   Perspective(const Point3D &pt);         // set pos parallel to pt.
 
   // Copy constuctor and assignment operator.

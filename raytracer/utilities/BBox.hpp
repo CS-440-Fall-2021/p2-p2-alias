@@ -36,7 +36,7 @@ public:
   std::string to_string() const;
 
   // Does ray hit bbox? If so, set entering and leaving t values for ray.
-  bool hit(const Ray &ray, float &t_enter, float &t_exit) const;
+  bool hit(const Ray &ray, double &t_enter, double &t_exit) const;
 
   // Extend this bbox, if necessary, to include g or b.
   void extend(Geometry* g);

@@ -30,9 +30,9 @@ std::string Rectangle::to_string() const
     return out;
 }
 
-bool Rectangle::hit(const Ray& ray, float& t, ShadeInfo& s) const {	
+bool Rectangle::hit(const Ray& ray, double& t, ShadeInfo& s) const {	
 	
-	float ti = (p0 - ray.o) * normal / (ray.d * normal); 
+	double ti = (p0 - ray.o) * normal / (ray.d * normal); 
 	
 	if (ti <= kEpsilon)
 		return (false);
@@ -40,12 +40,12 @@ bool Rectangle::hit(const Ray& ray, float& t, ShadeInfo& s) const {
 	Point3D p = ray.o + t * ray.d;
 	Vector3D d = p - p0;
 	
-	float ddota = d * a;
+	double ddota = d * a;
 	
 	if (ddota < 0.0 || ddota > a_len_squared)
 		return (false);
 		
-	float ddotb = d * b;
+	double ddotb = d * b;
 	
 	if (ddotb < 0.0 || ddotb > b_len_squared)
 		return (false);
@@ -75,3 +75,6 @@ BBox Rectangle::getBBox() const{
     return BBox(PMIN, PMAX);
 }
 
+Rectangle *Rectangle::clone() const{
+	return (new Rectangle(*this));
+}

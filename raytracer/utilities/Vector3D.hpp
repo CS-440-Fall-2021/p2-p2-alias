@@ -13,13 +13,13 @@ class Point3D;
 
 class Vector3D {
 public:
-  float x, y, z; // the components.
+  double x, y, z; // the components.
 
 public:
   // Constructors.
   Vector3D();                                // set vector to (0, 0, 0).
-  Vector3D(float c);                        // set vector to (c, c, c).
-  Vector3D(float _x, float _y, float _z); // set vector to (_x, _y, _z).
+  Vector3D(double c);                        // set vector to (c, c, c).
+  Vector3D(double _x, double _y, double _z); // set vector to (_x, _y, _z).
   Vector3D(const Point3D &p);                // construct from a point.
 
   // Copy constructor and assignment operator.
@@ -42,19 +42,19 @@ public:
   Vector3D operator-=(const Vector3D &v);        // compound subtraction.
 
   // Scaling.
-  Vector3D operator*(const float a) const;
-  Vector3D operator/(const float a) const;
+  Vector3D operator*(const double a) const;
+  Vector3D operator/(const double a) const;
   void normalize(); // nomalize - convert to a unit vector.
   Vector3D hat() const; // return a normalized vector of this vector.
 
   // Length.
-  float length() const;      // length.
-  float len_squared() const; // square of the length.
+  double length() const;      // length.
+  double len_squared() const; // square of the length.
 
   // Vector products.
-  float operator*(const Vector3D &b) const;   // dot product.
+  double operator*(const Vector3D &b) const;   // dot product.
   Vector3D operator^(const Vector3D &v) const; // cross product.
 };
 
 // Scaling.
-Vector3D operator*(const float a, const Vector3D &v);
+Vector3D operator*(const double a, const Vector3D &v);

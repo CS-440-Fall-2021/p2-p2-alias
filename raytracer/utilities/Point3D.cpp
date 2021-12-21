@@ -6,13 +6,13 @@ Point3D::Point3D(){ // set point to (0, 0, 0).
     z = 0;
 }
 
-Point3D::Point3D(float c){ // set point to (c, c, c).
+Point3D::Point3D(double c){ // set point to (c, c, c).
     x = c;
     y = c;
     z = c;
 }
 
-Point3D::Point3D(float _x, float _y, float _z){ // set point to (x,y,z).
+Point3D::Point3D(double _x, double _y, double _z){ // set point to (x,y,z).
     x = _x;
     y = _y;
     z = _z;
@@ -47,22 +47,22 @@ Point3D Point3D::operator-(const Vector3D &v) const{ // subtraction of a vector
     return Point3D(x-v.x, y-v.y, z-v.z);
 }
 
-Point3D Point3D::operator*(const float s) const{ // scale the point by a factor, s.
+Point3D Point3D::operator*(const double s) const{ // scale the point by a factor, s.
     return Point3D(x*s, y*s, z*s);
 }    
 
-float Point3D::d_squared(const Point3D &p) const{ // square of distance
+double Point3D::d_squared(const Point3D &p) const{ // square of distance
     // (this - p) is the distance vector
     return (*this - p).len_squared();
 }
 
-float Point3D::distance(const Point3D &p) const{ // distance
+double Point3D::distance(const Point3D &p) const{ // distance
     // (this - p) is the distance vector
     return (*this - p).length();
 }
 
 // Scale pt by a factor, s.
-Point3D operator*(const float a, const Point3D &pt){
+Point3D operator*(const double a, const Point3D &pt){
     return pt * a;
 }
 
@@ -78,9 +78,9 @@ Point3D operator*(const float a, const Point3D &pt){
 
 // Compare points.
 Point3D min(const Point3D& a, const Point3D& b){
-    float minX;
-    float minY;
-    float minZ;
+    double minX;
+    double minY;
+    double minZ;
 
     if (a.x <= b.x){
         minX = a.x;
@@ -105,9 +105,9 @@ Point3D min(const Point3D& a, const Point3D& b){
 }
 
 Point3D max(const Point3D& a, const Point3D& b){
-    float maxX;
-    float maxY;
-    float maxZ;
+    double maxX;
+    double maxY;
+    double maxZ;
 
     if (a.x >= b.x){
         maxX = a.x;

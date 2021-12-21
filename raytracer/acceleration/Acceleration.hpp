@@ -23,9 +23,9 @@ public:
     // getBBox(void);
     void
     setup_cells(void);
-    virtual bool hit(const Ray &ray, float &tmin, ShadeInfo &s) const;
+    virtual bool hit(const Ray &ray, double &tmin, ShadeInfo &s) const;
     virtual bool
-    shadow_hit(Ray &ray, float &tmin);
+    shadow_hit(Ray &ray, double &tmin);
 
     BBox getBBox() const;
 private:
@@ -36,4 +36,5 @@ private:
     min_coordinates(void);
     Point3D // compute maximum grid coordinates
     max_coordinates(void);
+    Acceleration *clone();
 };

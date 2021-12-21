@@ -24,11 +24,11 @@ RGBColor Reflective::shade(ShadeInfo& sr) {
     return (L);
 }
 
-void Reflective::set_kr(const float kr){
+void Reflective::set_kr(const double kr){
     reflective_brdf->set_kr(kr);
 }
 
-void Reflective::set_cr(const float cr){
+void Reflective::set_cr(const double cr){
     reflective_brdf->set_cr(cr);
 }
 

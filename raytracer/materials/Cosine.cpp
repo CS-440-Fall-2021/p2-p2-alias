@@ -6,11 +6,11 @@ Cosine::Cosine(){
     color = RGBColor(0);
 }
 
-Cosine::Cosine(float c){
+Cosine::Cosine(double c){
     color = RGBColor(c);    
 }
 
-Cosine::Cosine(float r, float g, float b){
+Cosine::Cosine(double r, double g, double b){
     color = RGBColor(r, g, b);    
 
 }

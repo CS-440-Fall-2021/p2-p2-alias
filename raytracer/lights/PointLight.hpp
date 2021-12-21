@@ -4,13 +4,13 @@
 
 class PointLight : public Light{
     private:
-        float ls;
+        double ls;
         RGBColor color;
         Vector3D location;
 
     public:
         PointLight();
-        PointLight(float l, RGBColor col, Vector3D loc);
+        PointLight(double l, RGBColor col, Vector3D loc);
         
         PointLight(const PointLight &other) = default;
         PointLight &operator=(const PointLight &rhs) = default;
@@ -21,6 +21,6 @@ class PointLight : public Light{
         virtual RGBColor L(ShadeInfo& si);
 
         // Access Methods
-        void set_location(const float x, const float y, const float z);
-        void scale_radiance(const float f);
+        void set_location(const double x, const double y, const double z);
+        void scale_radiance(const double f);
 };

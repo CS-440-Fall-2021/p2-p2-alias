@@ -9,7 +9,7 @@ Camera::Camera(Point3D eye_, Point3D lookat_, Vector3D up_): eye(eye_), lookat(l
                                                             up(up_), exposure_time(1.0) {
 }
 
-Camera::Camera(Point3D eye_, Point3D lookat_, Vector3D up_, float expos_time): eye(eye_), lookat(lookat_), 
+Camera::Camera(Point3D eye_, Point3D lookat_, Vector3D up_, double expos_time): eye(eye_), lookat(lookat_), 
                                                             up(up_), exposure_time(expos_time) {
 }
 

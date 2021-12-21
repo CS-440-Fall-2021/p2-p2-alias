@@ -19,6 +19,6 @@ class Reflective: public Phong {
         virtual RGBColor shade(ShadeInfo& sr) override;   
 
         // Access Methods 
-        void set_kr(const float kr);
-        void set_cr(const float cr);
+        void set_kr(const double kr);
+        void set_cr(const double cr);
 };

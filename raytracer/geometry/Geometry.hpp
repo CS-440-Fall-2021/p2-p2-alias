@@ -37,10 +37,11 @@ public:
   void set_material(Material *mPtr);
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
-  virtual bool hit(const Ray &ray, float &t, ShadeInfo &sinfo) const = 0;
+  virtual bool hit(const Ray &ray, double &t, ShadeInfo &sinfo) const = 0;
 
   // Get bounding box.
   virtual BBox getBBox() const = 0;
 
   virtual void add_object(Geometry* object_ptr); 
+  virtual Geometry *clone() const = 0;
 };

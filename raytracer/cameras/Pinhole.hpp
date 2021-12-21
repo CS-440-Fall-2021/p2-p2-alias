@@ -9,14 +9,14 @@
 
 class Pinhole: public Camera{
     private:
-        float d;
-        float zoom;
+        double d;
+        double zoom;
 
     public:
         Pinhole();
-        Pinhole(Point3D eye, Point3D lookat, float d_);
+        Pinhole(Point3D eye, Point3D lookat, double d_);
         Pinhole(Point3D eye, Point3D lookat, Vector3D up, 
-                float exposure_time, float d, float zoom);
+                double exposure_time, double d, double zoom);
 
         Pinhole(const Pinhole &other) = default;
         Pinhole &operator=(const Pinhole &rhs) = default;

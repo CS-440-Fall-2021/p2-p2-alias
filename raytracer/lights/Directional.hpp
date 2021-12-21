@@ -4,13 +4,13 @@
 
 class Directional : public Light{
     protected:
-        float ls;
+        double ls;
         RGBColor color;
         Vector3D dir;
 
     public:
         Directional();
-        Directional(float l, RGBColor col, Vector3D dir);
+        Directional(double l, RGBColor col, Vector3D dir);
         
         Directional(const Directional &other) = default;
         Directional &operator=(const Directional &rhs) = default;
